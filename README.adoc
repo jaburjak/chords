@@ -1,0 +1,8 @@
+= Chords
+
+Chords is
+
+* a specification for
+** defining chords of string instruments,
+** writing song lyrics with chords, and
+* an implementation of the specification in PHP programming language.
