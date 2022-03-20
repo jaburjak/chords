@@ -1,0 +1,22 @@
+{
+	"name": "jaburjak/chords",
+	"description": "Library for processing string instrument chords and song lyrics with chords.",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Jakub Jabůrek",
+			"email": "jaburek.jakub@gmail.com",
+			"homepage": "https://www.jaburjak.cz"
+		}
+	],
+	"require": {
+		"php": ">=7.1.0",
+		"ext-simplexml": "*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^9"
+	},
+	"autoload": {
+		"psr-4": {"Chords\\": "src/"}
+	}
+}
