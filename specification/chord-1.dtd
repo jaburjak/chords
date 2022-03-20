@@ -1,0 +1,15 @@
+<!ELEMENT chord (name, def)>
+
+<!ELEMENT name (#PCDATA)>
+
+<!ELEMENT def (((def-strings, def-frets) | (def-frets, def-strings)), (def-note | def-mark)*)>
+<!ELEMENT def-strings (#PCDATA)>
+<!ELEMENT def-frets (#PCDATA)>
+
+<!ELEMENT def-note ((note-string, note-fret) | (note-fret, note-string))>
+<!ELEMENT note-string (#PCDATA)>
+<!ELEMENT note-fret (#PCDATA)>
+
+<!ELEMENT def-mark ((mark-string, mark-type) | (mark-type, mark-string))>
+<!ELEMENT mark-string (#PCDATA)>
+<!ELEMENT mark-type (#PCDATA)>
