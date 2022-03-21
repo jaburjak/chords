@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Chords\Parser;
 
 use SimpleXMLElement;
-use Chords\Model\Chord\Chord;
-use Chords\Model\Chord\ChordDefinition;
-use Chords\Model\Chord\ChordMark;
-use Chords\Model\Chord\ChordNote;
+use Chords\Chord\Model\Chord;
+use Chords\Chord\Model\ChordDefinition;
+use Chords\Chord\Model\ChordMark;
+use Chords\Chord\Model\ChordNote;
 
 final class ChordXmlParser {
 	public function parse(string $xml): Chord {

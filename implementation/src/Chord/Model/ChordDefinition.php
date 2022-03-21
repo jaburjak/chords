@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Chords\Model\Chord;
+namespace Chords\Chord\Model;
 
 use DomainException;
 use InvalidArgumentException;
