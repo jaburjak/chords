@@ -31,7 +31,59 @@ final class ChordXmlParserTest extends TestCase {
 	</def>
 </chord>
 XML,
-				new Chord('empty', new ChordDefinition(1, 1, [], []))]
+				new Chord('empty', new ChordDefinition(1, 1, [], []))],
+			'chord Dmi' => [<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord>
+	<name>Dmi</name>
+	<def>
+		<def-strings>6</def-strings>
+		<def-frets>5</def-frets>
+		<def-note>
+			<note-string>6</note-string>
+			<note-fret>1</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>4</note-string>
+			<note-fret>2</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>5</note-string>
+			<note-fret>3</note-fret>
+		</def-note>
+		<def-mark>
+			<mark-string>1</mark-string>
+			<mark-type>muted</mark-type>
+		</def-mark>
+		<def-mark>
+			<mark-string>2</mark-string>
+			<mark-type>muted</mark-type>
+		</def-mark>
+		<def-mark>
+			<mark-string>3</mark-string>
+			<mark-type>open</mark-type>
+		</def-mark>
+	</def>
+</chord>
+XML,
+				new Chord(
+					'Dmi',
+					new ChordDefinition(
+						6,
+						5,
+						[
+							new ChordNote(6, 1),
+							new ChordNote(4, 2),
+							new ChordNote(5, 3)
+						],
+						[
+							new ChordMark(1, ChordMark::TYPE_MUTED),
+							new ChordMark(2, ChordMark::TYPE_MUTED),
+							new ChordMark(3, ChordMark::TYPE_OPEN)
+						]
+					)
+				)]
 		];
 	}
 
