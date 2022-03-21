@@ -1,3 +1,17 @@
+<!--
+    This is the Chord 1.0 Document Type Definition, which belongs to the Chords specification.
+
+    The Chord 1.0 specification includes additional constraints that cannot be expressed within the DTD.
+
+    Further information about Chords is available at:
+      https://chords.jaburjak.cz
+
+    Author:
+      Jakub Jaburek <jaburek.jakub@gmail.com>
+
+    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+-->
+
 <!ELEMENT chord (name, def)>
 
 <!ELEMENT name (#PCDATA)>
