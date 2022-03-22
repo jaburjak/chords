@@ -6,9 +6,15 @@ namespace Chords\Chord\Model;
 use Chords\Contracts\EquatableInterface;
 
 final class Chord implements EquatableInterface {
-	private string $name;
+	/**
+	 * @var string
+	 */
+	private $name;
 
-	private ChordDefinition $definition;
+	/**
+	 * @var ChordDefinition
+	 */
+	private $definition;
 
 	public function getName(): string {
 		return $this->name;

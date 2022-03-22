@@ -8,13 +8,25 @@ use InvalidArgumentException;
 use Chords\Contracts\EquatableInterface;
 
 final class ChordDefinition implements EquatableInterface {
-	private int $strings;
+	/**
+	 * @var int
+	 */
+	private $strings;
 
-	private int $frets;
+	/**
+	 * @var int
+	 */
+	private $frets;
 
-	private array $notes;
+	/**
+	 * @var ChordNote[]
+	 */
+	private $notes;
 
-	private array $marks;
+	/**
+	 * @var ChordMark[]
+	 */
+	private $marks;
 
 	public function getStrings(): int {
 		return $this->strings;

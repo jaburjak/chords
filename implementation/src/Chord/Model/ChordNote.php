@@ -7,9 +7,15 @@ use DomainException;
 use Chords\Contracts\EquatableInterface;
 
 final class ChordNote implements EquatableInterface {
-	private int $string;
+	/**
+	 * @var int
+	 */
+	private $string;
 
-	private int $fret;
+	/**
+	 * @var int
+	 */
+	private $fret;
 
 	public function getString(): int {
 		return $this->string;

@@ -7,13 +7,25 @@ use DomainException;
 use Chords\Contracts\EquatableInterface;
 
 final class ChordMark implements EquatableInterface {
+	/**
+	 * @var string
+	 */
 	public const TYPE_MUTED = 'muted';
 
+	/**
+	 * @var string
+	 */
 	public const TYPE_OPEN = 'open';
 
-	private int $string;
+	/**
+	 * @var int
+	 */
+	private $string;
 
-	private string $type;
+	/**
+	 * @var string
+	 */
+	private $type;
 
 	public function getString(): int {
 		return $this->string;
