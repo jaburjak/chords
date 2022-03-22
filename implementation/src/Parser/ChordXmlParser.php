@@ -11,7 +11,11 @@ use Chords\Chord\Model\ChordNote;
 
 final class ChordXmlParser implements ChordXmlParserInterface {
 	public function parse(string $xml): Chord {
-		$sxml = simplexml_load_string($xml);
+		try {
+			$sxml = @simplexml_load_string($xml);
+		} catch (\Exception $e) {
+			throw new InvalidXmlException('Could not parse the given XML string.', 0, $e);
+		}
 
 		if (!$sxml) {
 			throw new InvalidXmlException('Could not parse the given XML string.');
