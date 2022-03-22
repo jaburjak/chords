@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
-<chord>
+<chord xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://chords.jaburjak.cz/schema/chord-1.xsd">
 	<name>Dmi</name>
 	<def>
 		<def-strings>6</def-strings>

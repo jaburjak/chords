@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    This is the Chord 1.0 XML Schema, which belongs to the Chords specification.
+
+    The Chord 1.0 specification includes additional constraints that cannot be expressed within the XSD.
+
+    Further information about Chords is available at:
+      https://chords.jaburjak.cz
+
+    Author:
+      Jakub Jaburek <jaburek.jakub@gmail.com>
+
+    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+-->
+<xs:schema xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://chords.jaburjak.cz/schema/chord-1.xsd"
+           elementFormDefault="qualified">
+
+	<xs:simpleType name="naturalNumber">
+		<xs:restriction base="xs:integer">
+			<xs:minExclusive value="0" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="markType">
+		 <xs:restriction base="xs:string">
+			<xs:enumeration value="open" />
+			<xs:enumeration value="muted" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="name" type="xs:string" />
+	<xs:element name="def-strings" type="naturalNumber" />
+	<xs:element name="def-frets" type="naturalNumber" />
+	<xs:element name="note-string" type="naturalNumber" />
+	<xs:element name="note-fret" type="naturalNumber" />
+	<xs:element name="mark-string" type="naturalNumber" />
+	<xs:element name="mark-type" type="markType" />
+
+	<xs:element name="def-note">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="note-string" />
+				<xs:element ref="note-fret" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="def-mark">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="mark-string" />
+				<xs:element ref="mark-type" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="def">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:sequence>
+						<xs:element ref="def-strings" />
+						<xs:element ref="def-frets" />
+					</xs:sequence>
+					<xs:sequence>
+						<xs:element ref="def-frets" />
+						<xs:element ref="def-strings" />
+					</xs:sequence>
+				</xs:choice>
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:choice>
+						<xs:element ref="def-note" />
+						<xs:element ref="def-mark" />
+					</xs:choice>
+				</xs:sequence>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="chord">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" minOccurs="1" />
+				<xs:element ref="def" minOccurs="1" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

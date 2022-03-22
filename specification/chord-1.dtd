@@ -14,6 +14,11 @@
 
 <!ELEMENT chord (name, def)>
 
+<!ATTLIST chord xmlns CDATA #IMPLIED>
+<!ATTLIST chord xmlns:xsi CDATA #IMPLIED>
+<!ATTLIST chord xsi:schemaLocation CDATA #IMPLIED>
+<!ATTLIST chord xsi:noNamespaceSchemaLocation CDATA #IMPLIED>
+
 <!ELEMENT name (#PCDATA)>
 
 <!ELEMENT def (((def-strings, def-frets) | (def-frets, def-strings)), (def-note | def-mark)*)>
