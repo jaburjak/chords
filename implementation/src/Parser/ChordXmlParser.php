@@ -9,7 +9,7 @@ use Chords\Chord\Model\ChordDefinition;
 use Chords\Chord\Model\ChordMark;
 use Chords\Chord\Model\ChordNote;
 
-final class ChordXmlParser {
+final class ChordXmlParser implements ChordXmlParserInterface {
 	public function parse(string $xml): Chord {
 		$sxml = simplexml_load_string($xml);
 
