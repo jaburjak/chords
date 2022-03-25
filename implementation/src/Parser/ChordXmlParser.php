@@ -55,7 +55,17 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 
 		$frets = intval($frets);
 
-		return new ChordDefinition($strings, $frets, $this->parseNotes($sxml), $this->parseMarks($sxml));
+		$fretOffset = (string) $sxml->def->{'def-frets'}[0]->attributes()['offset'];
+
+		if ($fretOffset === '') {
+			$fretOffset = 0;
+		} else if (!is_numeric($fretOffset)) {
+			throw new InvalidXmlException('Encountered non-numeric value in "offset" attribute of <def-frets>.');
+		} else {
+			$fretOffset = intval($fretOffset);
+		}
+
+		return new ChordDefinition($strings, $frets, $fretOffset, $this->parseNotes($sxml), $this->parseMarks($sxml));
 	}
 
 	/**

@@ -43,6 +43,7 @@ final class ChordTest extends TestCase {
 
 		$strings = rand(1, 128);
 		$frets = rand(1, 128);
+		$fretOffset = rand(0, $frets - 1);
 
 		$notes = [];
 
@@ -50,7 +51,7 @@ final class ChordTest extends TestCase {
 			if (rand(0, 1) === 1) continue;
 
 			$string = rand(1, $strings);
-			$fret = rand(1, $frets);
+			$fret = rand($fretOffset + 1, $frets);
 
 			$notes[sprintf('%d:%d', $string, $fret)] = [$string, $fret];
 		}
@@ -70,6 +71,7 @@ final class ChordTest extends TestCase {
 			'name' => $name,
 			'strings' => $strings,
 			'frets' => $frets,
+			'fretOffset' => $fretOffset,
 			'notes' => $notes,
 			'marks' => $marks
 		];
@@ -81,6 +83,7 @@ final class ChordTest extends TestCase {
 			new ChordDefinition(
 				$data['strings'],
 				$data['frets'],
+				$data['fretOffset'],
 				array_map(function (array $note) {
 					return new ChordNote($note[0], $note[1]);
 				}, $data['notes']),
