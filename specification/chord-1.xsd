@@ -31,8 +31,19 @@
 	</xs:simpleType>
 
 	<xs:element name="name" type="xs:string" />
+
 	<xs:element name="def-strings" type="naturalNumber" />
-	<xs:element name="def-frets" type="naturalNumber" />
+
+	<xs:element name="def-frets">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="naturalNumber">
+					<xs:attribute name="offset" type="naturalNumber" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
 	<xs:element name="note-string" type="naturalNumber" />
 	<xs:element name="note-fret" type="naturalNumber" />
 	<xs:element name="mark-string" type="naturalNumber" />

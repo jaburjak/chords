@@ -25,6 +25,8 @@
 <!ELEMENT def-strings (#PCDATA)>
 <!ELEMENT def-frets (#PCDATA)>
 
+<!ATTLIST def-frets offset CDATA #IMPLIED>
+
 <!ELEMENT def-note ((note-string, note-fret) | (note-fret, note-string))>
 <!ELEMENT note-string (#PCDATA)>
 <!ELEMENT note-fret (#PCDATA)>
