@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
     This is the Chord 1.0 XML Schema, which belongs to the Chords specification.
 
@@ -17,12 +17,6 @@
            targetNamespace="https://chords.jaburjak.cz/schema/chord-1.xsd"
            elementFormDefault="qualified">
 
-	<xs:simpleType name="naturalNumber">
-		<xs:restriction base="xs:integer">
-			<xs:minExclusive value="0" />
-		</xs:restriction>
-	</xs:simpleType>
-
 	<xs:simpleType name="markType">
 		 <xs:restriction base="xs:string">
 			<xs:enumeration value="open" />
@@ -32,21 +26,21 @@
 
 	<xs:element name="name" type="xs:string" />
 
-	<xs:element name="def-strings" type="naturalNumber" />
+	<xs:element name="def-strings" type="xs:positiveInteger" />
 
 	<xs:element name="def-frets">
 		<xs:complexType>
 			<xs:simpleContent>
-				<xs:extension base="naturalNumber">
-					<xs:attribute name="offset" type="naturalNumber" />
+				<xs:extension base="xs:positiveInteger">
+					<xs:attribute name="offset" type="xs:nonNegativeInteger" />
 				</xs:extension>
 			</xs:simpleContent>
 		</xs:complexType>
 	</xs:element>
 
-	<xs:element name="note-string" type="naturalNumber" />
-	<xs:element name="note-fret" type="naturalNumber" />
-	<xs:element name="mark-string" type="naturalNumber" />
+	<xs:element name="note-string" type="xs:positiveInteger" />
+	<xs:element name="note-fret" type="xs:positiveInteger" />
+	<xs:element name="mark-string" type="xs:positiveInteger" />
 	<xs:element name="mark-type" type="markType" />
 
 	<xs:element name="def-note">
