@@ -39,7 +39,14 @@ final class ChordTest extends TestCase {
 	}
 
 	private function generateData(): array {
-		$name = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#'), 0, rand(1, 20));
+		$name = self::randomString();
+
+		$alternatives = rand(0, 6);
+		$alternativeNames = [];
+
+		for ($i = 0; $i < $alternatives; $i++) {
+			$alternativeNames[] = self::randomString();
+		}
 
 		$strings = rand(1, 128);
 		$frets = rand(1, 128);
@@ -69,6 +76,7 @@ final class ChordTest extends TestCase {
 
 		return [
 			'name' => $name,
+			'alternativeNames' => $alternativeNames,
 			'strings' => $strings,
 			'frets' => $frets,
 			'fretOffset' => $fretOffset,
@@ -90,7 +98,12 @@ final class ChordTest extends TestCase {
 				array_map(function (array $mark) {
 					return new ChordMark($mark[0], $mark[1]);
 				}, $data['marks'])
-			)
+			),
+			$data['alternativeNames']
 		);
+	}
+
+	private static function randomString(): string {
+		return substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ#'), 0, rand(1, 20));
 	}
 }

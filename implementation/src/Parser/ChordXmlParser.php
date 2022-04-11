@@ -27,7 +27,35 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 			throw new InvalidXmlException('Missing or empty <name> element.');
 		}
 
-		return new Chord($name, $this->parseDefinition($sxml));
+		if (!isset($sxml->def)) {
+			throw new InvalidXmlException('Missing <def> element.');
+		}
+
+		return new Chord($name, $this->parseDefinition($sxml), $this->parseAlternativeNames($sxml));
+	}
+
+	/**
+	 * @return string[]
+	 */
+	private function parseAlternativeNames(SimpleXMLElement $sxml): array {
+		$alternativeNames = [];
+
+		if (!isset($sxml->{'alt-names'})) {
+			return $alternativeNames;
+		}
+
+		/** @var SimpleXMLElement $name */
+		foreach ($sxml->{'alt-names'}->name as $name) {
+			$name = (string) $name;
+
+			if ($name === '') {
+				throw new InvalidXmlException('Element <name> cannot be empty.');
+			}
+
+			$alternativeNames[] = $name;
+		}
+
+		return $alternativeNames;
 	}
 
 	private function parseDefinition(SimpleXMLElement $sxml): ChordDefinition {
