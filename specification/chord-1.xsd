@@ -26,6 +26,14 @@
 
 	<xs:element name="name" type="xs:string" />
 
+	<xs:element name="alt-names">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="name" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element> 
+
 	<xs:element name="def-strings" type="xs:positiveInteger" />
 
 	<xs:element name="def-frets">
@@ -88,6 +96,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="name" minOccurs="1" />
+				<xs:element ref="alt-names" minOccurs="0" />
 				<xs:element ref="def" minOccurs="1" />
 			</xs:sequence>
 		</xs:complexType>

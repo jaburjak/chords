@@ -12,7 +12,7 @@
     Copyright (c) 2022 Jakub Jaburek. All rights reserved.
 -->
 
-<!ELEMENT chord (name, def)>
+<!ELEMENT chord ((name, def) | (name, alt-names, def))>
 
 <!ATTLIST chord xmlns CDATA #IMPLIED>
 <!ATTLIST chord xmlns:xsi CDATA #IMPLIED>
@@ -20,6 +20,8 @@
 <!ATTLIST chord xsi:noNamespaceSchemaLocation CDATA #IMPLIED>
 
 <!ELEMENT name (#PCDATA)>
+
+<!ELEMENT alt-names (name*)>
 
 <!ELEMENT def (((def-strings, def-frets) | (def-frets, def-strings)), (def-note | def-mark)*)>
 <!ELEMENT def-strings (#PCDATA)>
