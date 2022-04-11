@@ -84,6 +84,67 @@ XML,
 							new ChordMark(3, ChordMark::TYPE_OPEN)
 						]
 					)
+				)],
+			'chord C/Cdur/Cmajor with offset' => [<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord>
+	<name>C</name>
+	<alt-names>
+		<name>Cdur</name>
+		<name>Cmajor</name>
+	</alt-names>
+	<def>
+		<def-strings>6</def-strings>
+		<def-frets offset="7">12</def-frets>
+		<def-note>
+			<note-string>6</note-string>
+			<note-fret>8</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>5</note-string>
+			<note-fret>8</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>4</note-string>
+			<note-fret>9</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>3</note-string>
+			<note-fret>10</note-fret>
+		</def-note>
+		<def-mark>
+			<mark-string>1</mark-string>
+			<mark-type>muted</mark-type>
+		</def-mark>
+		<def-mark>
+			<mark-string>2</mark-string>
+			<mark-type>muted</mark-type>
+		</def-mark>
+	</def>
+</chord>
+XML,
+				new Chord(
+					'C',
+					new ChordDefinition(
+						6,
+						12,
+						7,
+						[
+							new ChordNote(6, 8),
+							new ChordNote(5, 8),
+							new ChordNote(4, 9),
+							new ChordNote(3, 10)
+						],
+						[
+							new ChordMark(1, ChordMark::TYPE_MUTED),
+							new ChordMark(2, ChordMark::TYPE_MUTED)
+						]
+					),
+					[
+						'Cdur',
+						'Cmajor'
+					]
 				)]
 		];
 	}
