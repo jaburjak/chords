@@ -84,8 +84,8 @@ final class SongXmlParserTest extends TestCase {
 		<strophe-ref ref="R" />
 	</lyrics>
 </song>
-XML,
-				new Song(
+XML
+				,new Song(
 					new SongInfo('Okoř', null),
 					new SongLyrics([
 						new Strophe([

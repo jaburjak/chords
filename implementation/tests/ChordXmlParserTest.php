@@ -30,8 +30,8 @@ final class ChordXmlParserTest extends TestCase {
 		<def-frets>1</def-frets>
 	</def>
 </chord>
-XML,
-				new Chord('empty', new ChordDefinition(1, 1, 0, [], []))],
+XML
+				,new Chord('empty', new ChordDefinition(1, 1, 0, [], []))],
 			'chord Dmi' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -66,8 +66,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				new Chord(
+XML
+				,new Chord(
 					'Dmi',
 					new ChordDefinition(
 						6,
@@ -123,8 +123,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				new Chord(
+XML
+				,new Chord(
 					'C',
 					new ChordDefinition(
 						6,
@@ -175,16 +175,16 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'missing <def>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
 <chord>
 	<name>Dmi</name>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'missing <def-strings>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -198,8 +198,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'missing <def-frets>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -213,8 +213,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'non-numeric <def-strings>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -229,8 +229,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'non-numeric <def-frets>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -245,8 +245,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'non-numeric offset' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -261,8 +261,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'zero in <def-strings>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -277,8 +277,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'zero in <def-frets>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -293,8 +293,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'<def-frets> equal to offset' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -309,8 +309,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'smaller <def-frets> than offset' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -325,8 +325,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'offset of <def-frets> equal to <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -341,8 +341,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'greater offset of <def-frets> than <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -357,8 +357,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'missing <note-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -372,8 +372,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'missing <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -387,8 +387,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'zero in <note-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -403,8 +403,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'zero in <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -419,8 +419,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'too large <note-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -435,8 +435,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'too large <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -451,8 +451,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'duplicate <def-note>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -471,8 +471,8 @@ XML,
 		</def-note>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'missing <mark-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -490,8 +490,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'missing <mark-type>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -509,8 +509,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\Chords\Exception\InvalidXmlException'],
+XML
+				,'\Chords\Exception\InvalidXmlException'],
 			'zero in <mark-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -529,8 +529,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'too large <mark-string>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -549,8 +549,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'invalid <mark-type>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -569,8 +569,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\DomainException'],
+XML
+				,'\DomainException'],
 			'duplicate <def-mark>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -593,8 +593,8 @@ XML,
 		</def-mark>
 	</def>
 </chord>
-XML,
-				'\DomainException']
+XML
+				,'\DomainException']
 		];
 	}
 }

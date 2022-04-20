@@ -6,7 +6,7 @@ test:
   image: edbizarro/gitlab-ci-pipeline-php:7.1
   before_script:
     - cd implementation
+    - sudo chown -R "$(id -un):$(id -gn)" .
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
   script:
-    - cd implementation
     - ./vendor/bin/phpunit
