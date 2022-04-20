@@ -1,0 +1,12 @@
+stages:
+  - test
+
+test:
+  stage: test
+  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  before_script:
+    - cd implementation
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+  script:
+    - cd implementation
+    - ./vendor/bin/phpunit
