@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Chords\Parser;
+namespace Chords\Exception;
 
 use RuntimeException;
 

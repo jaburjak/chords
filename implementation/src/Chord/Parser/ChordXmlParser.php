@@ -1,13 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Chords\Parser;
+namespace Chords\Chord\Parser;
 
 use SimpleXMLElement;
 use Chords\Chord\Model\Chord;
 use Chords\Chord\Model\ChordDefinition;
 use Chords\Chord\Model\ChordMark;
 use Chords\Chord\Model\ChordNote;
+use Chords\Exception\InvalidXmlException;
 
 final class ChordXmlParser implements ChordXmlParserInterface {
 	public function parse(string $xml): Chord {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Chords\Parser;
+namespace Chords\Chord\Parser;
 
 use Chords\Chord\Model\Chord;
 
