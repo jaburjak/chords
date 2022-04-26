@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chords\Song\Model;
 
 use InvalidArgumentException;
+use Chords\Song\Export\VisitorInterface;
 
 final class Strophe implements NodeContainer {
 	use NodeContainerEquatableTrait {
@@ -52,6 +53,13 @@ final class Strophe implements NodeContainer {
 		}
 
 		$this->label = $label;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function accept(VisitorInterface $visitor): void {
+		$visitor->visitStrophe($this);
 	}
 
 	/**

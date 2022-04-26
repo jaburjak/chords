@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chords\Song\Model;
 
 use Chords\Contracts\EquatableInterface;
+use Chords\Song\Export\VisitorInterface;
 
 final class Song implements EquatableInterface {
 	/**
@@ -27,6 +28,13 @@ final class Song implements EquatableInterface {
 	public function __construct(SongInfo $info, SongLyrics $lyrics) {
 		$this->info = $info;
 		$this->lyrics = $lyrics;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function accept(VisitorInterface $visitor): void {
+		$visitor->visitSong($this);
 	}
 
 	/**

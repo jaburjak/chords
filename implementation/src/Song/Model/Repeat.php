@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chords\Song\Model;
 
 use InvalidArgumentException;
+use Chords\Song\Export\VisitorInterface;
 
 final class Repeat implements NodeContainer {
 	use NodeContainerEquatableTrait {
@@ -48,6 +49,13 @@ final class Repeat implements NodeContainer {
 		}
 
 		$this->count = $count;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function accept(VisitorInterface $visitor): void {
+		$visitor->visitRepeat($this);
 	}
 
 	/**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chords\Song\Model;
 
 use InvalidArgumentException;
+use Chords\Song\Export\VisitorInterface;
 
 final class Chord implements Node {
 	/**
@@ -21,6 +22,13 @@ final class Chord implements Node {
 		}
 
 		$this->name = $name;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function accept(VisitorInterface $visitor): void {
+		$visitor->visitChord($this);
 	}
 
 	/**

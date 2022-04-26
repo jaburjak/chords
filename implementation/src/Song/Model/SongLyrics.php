@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Chords\Song\Model;
 
 use InvalidArgumentException;
+use Chords\Song\Export\VisitorInterface;
 
 final class SongLyrics implements NodeContainer {
 	use NodeContainerEquatableTrait;
@@ -31,5 +32,12 @@ final class SongLyrics implements NodeContainer {
 		});
 
 		$this->nodes = array_values($nodes);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function accept(VisitorInterface $visitor): void {
+		$visitor->visitSongLyrics($this);
 	}
 }
