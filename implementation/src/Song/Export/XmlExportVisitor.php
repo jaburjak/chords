@@ -31,9 +31,15 @@ final class XmlExportVisitor implements VisitorInterface {
 
 	private const REPEAT_COUNT_DEFAULT = 2;
 
-	private DOMDocument $dom;
+	/**
+	 * @var DOMDocument
+	 */
+	private $dom;
 
-	private SplStack $fragmentStack;
+	/**
+	 * @var SplStack
+	 */
+	private $fragmentStack;
 
 	public function __construct() {
 		$implementation = new DOMImplementation();
