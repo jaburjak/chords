@@ -5,7 +5,7 @@ namespace Chords\Song\Export;
 
 use Chords\Song\Model\Song;
 
-final class SongXmlExporter {
+final class SongXmlExporter implements SongXmlExporterInterface {
 	public function toXml(Song $song): string {
 		$visitor = new XmlExportVisitor();
 
