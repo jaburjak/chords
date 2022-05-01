@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Chords\Song\Export;
 
+use \BadMethodCallException;
 use \RuntimeException;
 use \UnexpectedValueException;
 use Chords\Song\Model\Chord;
@@ -298,7 +299,7 @@ final class HtmlExportVisitor implements VisitorInterface {
 	 */
 	public function visitText(Text $text): void {
 		if (!$this->row) {
-			throw new BadMethodCallException('Cannot visit Chord while not in a Verse context.');
+			throw new BadMethodCallException('Cannot visit Text while not in a Verse context.');
 		}
 
 		$count = count($this->row['text']);
