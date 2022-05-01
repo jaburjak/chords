@@ -11,7 +11,7 @@
 		<strophe label="1">
 			<paragraph>
 				<verse><chord>D</chord>Na Okoř je cesta jako žádná ze sta,</verse>
-				<verse><chord>A7</chord>vroubená je <repeat count="2">stromama</repeat><chord>D</chord>.</verse>
+				<verse><chord>A7</chord>vroubená je <repeat>stromama</repeat><chord>D</chord>.</verse>
 				<verse>Když jdu po ní v létě, samoten na světě,</verse>
 				<verse><chord>A7</chord>sotva pletu nohama<chord>D</chord>.</verse>
 				<verse><chord>D</chord>Na konci té cesty <chord>D</chord>trnité,</verse>
@@ -42,18 +42,20 @@
 		</strophe>
 		<strophe label="2">
 			<paragraph>
-				<verse><chord>D</chord>Jednoho dne z rána,</verse>
+				<verse><chord print="false">D</chord>Jednoho dne z rána,</verse>
 				<verse>roznesla se zpráva,</verse>
-				<verse><chord>A7</chord>že byl Okoř <repeat>vykraden</repeat><chord>D</chord>.</verse>
+				<verse><chord print="false">A7</chord>že byl Okoř <repeat>vykraden</repeat><chord print="false">D</chord>.</verse>
 				<verse>Nikdo neví dodnes,</verse>
 				<verse>kdo to tenkrát odnes,</verse>
-				<verse><chord>A7</chord>nikdo nebyl <chord>D</chord>dopaden.</verse>
-				<verse><chord>G</chord>Šerif hrál celou noc <chord>D</chord>mariáš</verse>
-				<verse>s <chord>E</chord>bílou paní v <chord>A7</chord>kostnici.</verse>
-				<verse><chord>D</chord>Místo aby hlídal, zuřivě jí líbal,</verse>
-				<verse><chord>A7</chord>dostal z toho zimnici<chord>D</chord>.</verse>
+				<verse><chord print="false">A7</chord>nikdo nebyl <chord print="false">D</chord>dopaden.</verse>
+				<verse><chord print="false">G</chord>Šerif hrál celou noc <chord print="false">D</chord>mariáš</verse>
+				<verse>s <chord print="false">E</chord>bílou paní v <chord print="false">A7</chord>kostnici.</verse>
+				<verse><chord print="false">D</chord>Místo aby hlídal, zuřivě jí líbal,</verse>
+				<verse><chord print="false">A7</chord>dostal z toho zimnici<chord print="false">D</chord>.</verse>
 			</paragraph>
 		</strophe>
-		<strophe-ref ref="R" />
+		<repeat count="3">
+			<strophe-ref ref="R" />
+		</repeat>
 	</lyrics>
 </song>
