@@ -42,10 +42,6 @@ final class SongLyricsXmlParser {
 					break;
 				case 'repeat':
 					foreach ($this->extractLabeledStrophes($node) as $label => $strophe) {
-						if (isset($strophes[$label])) {
-							continue;
-						}
-
 						$strophes[$label] = $strophe;
 					}
 					break;
@@ -64,13 +60,7 @@ final class SongLyricsXmlParser {
 		foreach ($sxml->children() as $node) {
 			switch (strtolower($node->getName())) {
 				case 'strophe':
-					$label = (string) ($node['label'] ?? '');
-
-					if ($label !== '' && isset($labeledStrophes[$label])) {
-						$nodes[] = $labeledStrophes[$label];
-					} else {
-						$nodes[] = $this->parseStrophe($node);
-					}
+					$nodes[] = $this->parseStrophe($node);
 					break;
 				case 'strophe-ref':
 					$reference = (string) ($node['ref'] ?? '');
