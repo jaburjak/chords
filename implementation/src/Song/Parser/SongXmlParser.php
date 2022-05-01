@@ -11,6 +11,8 @@ use Chords\Song\Model\SongLyrics;
 
 final class SongXmlParser implements SongXmlParserInterface {
 	public function parse(string $xml): Song {
+		libxml_use_internal_errors(true);
+
 		try {
 			$sxml = @simplexml_load_string($xml);
 		} catch (\Exception $e) {
@@ -18,7 +20,16 @@ final class SongXmlParser implements SongXmlParserInterface {
 		}
 
 		if (!$sxml) {
-			throw new InvalidXmlException('Could not parse the given XML string.');
+			$errors = [];
+
+			foreach (libxml_get_errors() as $error) {
+				$errors[] = explode(PHP_EOL, $error->message)[0];
+			}
+
+			throw new InvalidXmlException(sprintf(
+				'Could not parse the given XML string: %s',
+				implode(', ', $errors)
+			));
 		}
 
 		return new Song($this->parseInfo($sxml), $this->parseLyrics($sxml));
