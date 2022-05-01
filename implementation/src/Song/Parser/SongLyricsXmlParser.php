@@ -173,7 +173,19 @@ final class SongLyricsXmlParser {
 	}
 
 	private function parseChord(DOMElement $dom): Chord {
-		return new Chord($dom->textContent);
+		switch (mb_strtolower($dom->getAttribute('print'))) {
+			case '':
+			case 'true':
+				$print = true;
+				break;
+			case 'false':
+				$print = false;
+				break;
+			default:
+				throw new InvalidXmlException('Attribute "print" must have a boolean value.');
+		}
+
+		return new Chord($dom->textContent, $print);
 	}
 
 	private function parseRepeat(SimpleXMLElement $sxml, array $context): Repeat {

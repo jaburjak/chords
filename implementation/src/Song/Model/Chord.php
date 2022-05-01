@@ -12,16 +12,26 @@ final class Chord implements Node {
 	 */
 	private $name;
 
+	/**
+	 * @var bool
+	 */
+	private $print;
+
 	public function getName(): string {
 		return $this->name;
 	}
 
-	public function __construct(string $name) {
+	public function isPrint(): bool {
+		return $this->print;
+	}
+
+	public function __construct(string $name, bool $print) {
 		if ($name === '') {
 			throw new InvalidArgumentException('Argument $name cannot be an empty string.');
 		}
 
 		$this->name = $name;
+		$this->print = $print;
 	}
 
 	/**
@@ -36,6 +46,7 @@ final class Chord implements Node {
 	 */
 	public function equals($other): bool {
 		return $other instanceof Chord &&
-		       $this->getName() === $other->getName();
+		       $this->getName() === $other->getName() &&
+		       $this->isPrint() === $other->isPrint();
 	}
 }

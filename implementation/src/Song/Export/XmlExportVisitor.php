@@ -67,6 +67,10 @@ final class XmlExportVisitor implements VisitorInterface {
 	public function visitChord(Chord $chord): void {
 		$element = $this->dom->createElement('chord', $chord->getName());
 
+		if (!$chord->isPrint()) {
+			$element->setAttribute('print', 'false');
+		}
+
 		$this->fragmentStack->top()->appendChild($element);
 	}
 

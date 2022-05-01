@@ -30,16 +30,16 @@ final class SongXmlParserTest extends TestCase {
 				new Paragraph([
 					new Verse([
 						new Text('Na hradě Okoři '),
-						new Chord('A7'),
+						new Chord('A7', true),
 						new Text('světla už nehoří,')
 					])
 				]),
 				new Paragraph([
 					new Repeat([
 						new Verse([
-							new Chord('D'),
+							new Chord('D', true),
 							new Text('on jí sebral '),
-							new Chord('A7'),
+							new Chord('A7', true),
 							new Text('od komnaty klíč.')
 						])
 					], 2)
@@ -91,16 +91,16 @@ XML
 						new Strophe([
 							new Paragraph([
 								new Verse([
-									new Chord('D'),
+									new Chord('D', true),
 									new Text('Na Okoř je cesta jako žádná ze sta,')
 								]),
 								new Verse([
-									new Chord('A7'),
+									new Chord('A7', true),
 									new Text('vroubená je '),
 									new Repeat([
 										new Text('stromama')
 									], 42),
-									new Chord('D'),
+									new Chord('D', true),
 									new Text('.')
 								])
 							])
@@ -109,7 +109,7 @@ XML
 						new Strophe([
 							new Paragraph([
 								new Verse([
-									new Chord('D'),
+									new Chord('D', true),
 									new Text('Jednoho dne z rána,')
 								])
 							])
