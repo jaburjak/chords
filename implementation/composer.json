@@ -11,7 +11,10 @@
 	],
 	"require": {
 		"php": ">=7.1.0",
-		"ext-simplexml": "*"
+		"ext-simplexml": "*",
+		"dompdf/dompdf": "^1.2",
+		"setasign/fpdf": "^1.8",
+		"setasign/fpdi": "^2.3"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^7.5"
