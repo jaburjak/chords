@@ -163,12 +163,14 @@ final class SongLyricsXmlParser {
 	}
 
 	private function parseChord(DOMElement $dom): Chord {
-		switch (mb_strtolower($dom->getAttribute('print'))) {
+		switch (mb_strtolower((string) $dom->getAttribute('print'))) {
 			case '':
 			case 'true':
+			case '1':
 				$print = true;
 				break;
 			case 'false':
+			case '0':
 				$print = false;
 				break;
 			default:
