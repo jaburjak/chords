@@ -95,9 +95,9 @@
 	<xs:element name="chord">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="name" minOccurs="1" />
+				<xs:element ref="name" />
 				<xs:element ref="alt-names" minOccurs="0" />
-				<xs:element ref="def" minOccurs="1" />
+				<xs:element ref="def" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
