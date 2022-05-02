@@ -1,0 +1,47 @@
+<!--
+    This is the Song 1.0 Document Type Definition, which belongs to the Chords specification.
+
+    The Song 1.0 specification includes additional constraints that cannot be expressed within the DTD.
+
+    Further information about Chords is available at:
+      https://chords.jaburjak.cz
+
+    Author:
+      Jakub Jaburek <jaburek.jakub@gmail.com>
+
+    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+-->
+
+<!ELEMENT song (info, lyrics)>
+
+<!ATTLIST song xmlns CDATA #IMPLIED>
+<!ATTLIST song xmlns:xsi CDATA #IMPLIED>
+<!ATTLIST song xsi:schemaLocation CDATA #IMPLIED>
+<!ATTLIST song xsi:noNamespaceSchemaLocation CDATA #IMPLIED>
+
+<!ELEMENT info ((title) | (title, author) | (author, title))>
+
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+
+<!ELEMENT lyrics ((strophe | strophe-ref | repeat)*)>
+
+<!ELEMENT strophe ((paragraph | repeat)*)>
+
+<!ATTLIST strophe label CDATA #IMPLIED>
+
+<!ELEMENT strophe-ref EMPTY>
+
+<!ATTLIST strophe-ref ref CDATA #REQUIRED>
+
+<!ELEMENT paragraph ((verse | repeat)*)>
+
+<!ELEMENT verse ((#PCDATA | chord | repeat)*)>
+
+<!ELEMENT chord (#PCDATA)>
+
+<!ATTLIST chord print CDATA #IMPLIED>
+
+<!ELEMENT repeat ((repeat | strophe | strophe-ref | paragraph | verse | #PCDATA | chord)*)>
+
+<!ATTLIST repeat count CDATA #IMPLIED>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This is the Song 1.0 XML Schema, which belongs to the Chords specification.
+
+    The Song 1.0 specification includes additional constraints that cannot be expressed within the XSD.
+
+    Further information about Chords is available at:
+      https://chords.jaburjak.cz
+
+    Author:
+      Jakub Jaburek <jaburek.jakub@gmail.com>
+
+    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+-->
+<xs:schema xmlns="https://chords.jaburjak.cz/schema/song-1.xsd"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="https://chords.jaburjak.cz/schema/song-1.xsd"
+           elementFormDefault="qualified">
+
+	<xs:element name="title" type="xs:string" />
+
+	<xs:element name="author" type="xs:string" />
+
+	<xs:element name="info">
+		<xs:complexType>
+			<xs:all>
+				<xs:element ref="title" />
+				<xs:element ref="author" minOccurs="0" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="repeatCount">
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="repeat">
+		<xs:complexType mixed="true">
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="repeat" />
+					<xs:element ref="strophe" />
+					<xs:element ref="strophe-ref" />
+					<xs:element ref="paragraph" />
+					<xs:element ref="verse" />
+					<xs:element ref="chord" />
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="count" type="repeatCount" default="2" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="chord">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="print" type="xs:boolean" default="true" />
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="verse">
+		<xs:complexType mixed="true">
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="repeat" />
+					<xs:element ref="chord" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="paragraph">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="repeat" />
+					<xs:element ref="verse" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="strophe-ref">
+		<xs:complexType>
+			<xs:attribute name="ref" type="xs:string" use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="strophe">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="repeat" />
+					<xs:element ref="paragraph" />
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="label" type="xs:string" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="lyrics">
+		<xs:complexType>
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:choice>
+					<xs:element ref="repeat" />
+					<xs:element ref="strophe" />
+				</xs:choice>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="song">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="info" />
+				<xs:element ref="lyrics" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>
