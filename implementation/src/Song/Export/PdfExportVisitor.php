@@ -44,13 +44,13 @@ final class PdfExportVisitor implements VisitorInterface {
 
 	private const STROPHE_LABEL_CLASSNAME = 'strophe-label';
 
-	private const STROPHE_LABEL_FORMAT = '%s. ';
+	private const STROPHE_LABEL_FORMAT = '%s ';
 
-	private const STROPHE_LABEL_REPEAT_FORMAT = '%s (%d×). ';
+	private const STROPHE_LABEL_REPEAT_FORMAT = '%s (%d×) ';
 
-	private const STROPHE_REFERENCE_FORMAT = '%s.';
+	private const STROPHE_REFERENCE_FORMAT = '%s';
 
-	private const STROPHE_REFERENCE_REPEAT_FORMAT = '%s. %d×';
+	private const STROPHE_REFERENCE_REPEAT_FORMAT = '%s %d×';
 
 	private const STROPHE_REFERENCE_CLASSNAME = 'strophe-reference';
 
