@@ -22,6 +22,8 @@ final class PdfExportVisitor implements VisitorInterface {
 
 	private const AUTHOR_CLASSNAME = 'author';
 
+	private const METADATA_CLASSNAME = 'meta';
+
 	private const CELL_CLASSNAME = 'cell';
 
 	private const TEXT_CLASSNAME = 'text';
@@ -183,11 +185,29 @@ final class PdfExportVisitor implements VisitorInterface {
 		$this->html[] = sprintf('<div class="%s">', htmlspecialchars(self::HEADER_CLASSNAME));
 		$this->html[] = sprintf('<h1>%s</h1>', htmlspecialchars($info->getTitle()));
 
+		if ($info->getAuthor() === null) {
+			$author = [];
+		} else {
+			$author = [$info->getAuthor()];
+		}
+
+		if (count($this->options->getMetadata()) > 0 && $this->options->getMetadata()[0] !== '') {
+			$author[] = $this->options->getMetadata()[0];
+		}
+
 		if ($info->getAuthor() !== null) {
 			$this->html[] = sprintf(
 				'<div class="%s">%s</div>',
 				htmlspecialchars_decode(self::AUTHOR_CLASSNAME),
-				htmlspecialchars($info->getAuthor())
+				htmlspecialchars(implode(' ', $author))
+			);
+		}
+
+		for ($i = 1; $i < count($this->options->getMetadata()); $i++) {
+			$this->html[] = sprintf(
+				'<div class="%s">%s</div>',
+				htmlspecialchars_decode(self::METADATA_CLASSNAME),
+				htmlspecialchars($this->options->getMetadata()[$i])
 			);
 		}
 

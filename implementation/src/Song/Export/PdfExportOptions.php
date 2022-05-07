@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Chords\Song\Export;
 
+use \InvalidArgumentException;
 use \UnexpectedValueException;
 
 final class PdfExportOptions {
@@ -35,6 +36,11 @@ final class PdfExportOptions {
 	 * @var bool
 	 */
 	private $printHiddenChords;
+
+	/**
+	 * @var string[]
+	 */
+	private $metadata;
 
 	public function getPaperSize(): string {
 		return $this->paperSize;
@@ -84,10 +90,29 @@ final class PdfExportOptions {
 		return $this;
 	}
 
+	public function getMetadata(): array {
+		return $this->metadata;
+	}
+
+	public function setMetadata(array $metadata): PdfExportOptions {
+		array_walk($metadata, function ($item) {
+			if (!is_string($item)) {
+				throw new InvalidArgumentException(sprintf(
+					'Argument $metadata expected to be an array of strings, %s found.',
+					gettype($item)
+				));
+			}
+		});
+
+		$this->metadata = array_values($metadata);
+		return $this;
+	}
+
 	public function __construct() {
 		$this->paperSize = self::PAPER_A4;
 		$this->columns = 2;
 		$this->fontSize = self::FONT_NORMAL;
 		$this->printHiddenChords = false;
+		$this->metadata = [];
 	}
 }
