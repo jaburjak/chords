@@ -77,7 +77,7 @@ final class SongHtmlExporterTest extends TestCase {
 									new Text('Jednoho dne z rána,')
 								])
 							])
-						], '2'),
+						], '2.'),
 						new Repeat(
 							[new StropheReference($R)],
 							2
@@ -85,7 +85,7 @@ final class SongHtmlExporterTest extends TestCase {
 					])
 				),
 				<<<HTML
-<div class="song-paragraph"><table><tbody><tr><td class="chord">D</td></tr><tr><td>Na Okoř je cesta jako žádná ze sta,</td></tr></tbody></table><table><tbody><tr><td class="chord">A7</td><td class="chord"></td><td class="chord"></td><td class="chord"></td><td class="chord">D</td></tr><tr><td>vroubená je </td><td class="repeat-marker">[: </td><td>stromama</td><td class="repeat-marker"> :] 42×</td><td>.</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord"></td><td class="chord">A7</td></tr><tr><td class="strophe-label">R (2×). </td><td>Na hradě Okoři </td><td>světla už nehoří,</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord">D</td><td class="chord">A7</td><td class="chord"></td></tr><tr><td class="repeat-marker">[: </td><td>on jí sebral </td><td>od komnaty klíč.</td><td class="repeat-marker"> :]</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord">D</td></tr><tr><td class="strophe-label">2. </td><td>Jednoho dne z rána,</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td></tr><tr><td class="strophe-reference">R. 2×</td></tr></tbody></table></div>
+<div class="song-paragraph"><table><tbody><tr><td class="chord">D</td></tr><tr><td>Na Okoř je cesta jako žádná ze sta,</td></tr></tbody></table><table><tbody><tr><td class="chord">A7</td><td class="chord"></td><td class="chord"></td><td class="chord"></td><td class="chord">D</td></tr><tr><td>vroubená je </td><td class="repeat-marker">[: </td><td>stromama</td><td class="repeat-marker"> :] 42×</td><td>.</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord"></td><td class="chord">A7</td></tr><tr><td class="strophe-label">R (2×) </td><td>Na hradě Okoři </td><td>světla už nehoří,</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord">D</td><td class="chord">A7</td><td class="chord"></td></tr><tr><td class="repeat-marker">[: </td><td>on jí sebral </td><td>od komnaty klíč.</td><td class="repeat-marker"> :]</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td><td class="chord">D</td></tr><tr><td class="strophe-label">2. </td><td>Jednoho dne z rána,</td></tr></tbody></table></div><div class="song-paragraph"><table><tbody><tr><td class="chord"></td></tr><tr><td class="strophe-reference">R 2×</td></tr></tbody></table></div>
 HTML
 			]
 		];
