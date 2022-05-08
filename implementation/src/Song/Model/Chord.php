@@ -40,13 +40,4 @@ final class Chord implements Node {
 	public function accept(VisitorInterface $visitor): void {
 		$visitor->visitChord($this);
 	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof Chord &&
-		       $this->getName() === $other->getName() &&
-		       $this->isPrint() === $other->isPrint();
-	}
 }

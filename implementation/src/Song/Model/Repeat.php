@@ -7,10 +7,6 @@ use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
 final class Repeat implements NodeContainer {
-	use NodeContainerEquatableTrait {
-		equals as private nodesEqual;
-	}
-
 	/**
 	 * @var Node[]
 	 */
@@ -56,13 +52,5 @@ final class Repeat implements NodeContainer {
 	 */
 	public function accept(VisitorInterface $visitor): void {
 		$visitor->visitRepeat($this);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $this->nodesEqual($other) &&
-		       $this->getCount() === $other->getCount();
 	}
 }

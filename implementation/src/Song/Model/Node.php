@@ -3,9 +3,8 @@ declare(strict_types=1);
 
 namespace Chords\Song\Model;
 
-use Chords\Contracts\EquatableInterface;
 use Chords\Song\Export\VisitorInterface;
 
-interface Node extends EquatableInterface {
+interface Node {
 	public function accept(VisitorInterface $visitor): void;
 }

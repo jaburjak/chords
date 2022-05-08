@@ -25,12 +25,4 @@ final class StropheReference implements Node {
 	public function accept(VisitorInterface $visitor): void {
 		$visitor->visitStropheReference($this);
 	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof StropheReference &&
-		       $this->getStrophe()->equals($other->getStrophe());
-	}
 }

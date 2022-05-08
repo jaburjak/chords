@@ -25,12 +25,4 @@ final class Text implements Node {
 	public function accept(VisitorInterface $visitor): void {
 		$visitor->visitText($this);
 	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof Text &&
-		       $this->getText() === $other->getText();
-	}
 }

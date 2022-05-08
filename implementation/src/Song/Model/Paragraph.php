@@ -7,8 +7,6 @@ use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
 final class Paragraph implements NodeContainer {
-	use NodeContainerEquatableTrait;
-
 	/**
 	 * @var Node[]
 	 */

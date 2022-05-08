@@ -21,7 +21,7 @@ final class SongXmlParserTest extends TestCase {
 	public function testValidXml($xml, $expected): void {
 		$parser = new SongXmlParser();
 
-		$this->assertTrue($expected->equals($parser->parse($xml)));
+		$this->assertEquals($expected, $parser->parse($xml));
 	}
 
 	public function xmlProvider(): array {

@@ -7,10 +7,6 @@ use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
 final class Strophe implements NodeContainer {
-	use NodeContainerEquatableTrait {
-		equals as private nodesEqual;
-	}
-
 	/**
 	 * @var Node[]
 	 */
@@ -60,13 +56,5 @@ final class Strophe implements NodeContainer {
 	 */
 	public function accept(VisitorInterface $visitor): void {
 		$visitor->visitStrophe($this);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $this->nodesEqual($other) &&
-		       $this->getLabel() === $other->getLabel();
 	}
 }
