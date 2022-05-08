@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://chords.jaburjak.cz/schema/chord-1.xsd">
+	<name>F</name>
+	<def>
+		<def-strings>6</def-strings>
+		<def-frets>5</def-frets>
+		<def-note>
+			<note-string>1</note-string>
+			<note-string>6</note-string>
+			<note-fret>1</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>4</note-string>
+			<note-fret>2</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>2</note-string>
+			<note-fret>3</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>3</note-string>
+			<note-fret>3</note-fret>
+		</def-note>
+	</def>
+</chord>

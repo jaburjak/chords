@@ -53,10 +53,16 @@
 
 	<xs:element name="def-note">
 		<xs:complexType>
-			<xs:all>
-				<xs:element ref="note-string" />
-				<xs:element ref="note-fret" />
-			</xs:all>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="note-string" maxOccurs="2" />
+					<xs:element ref="note-fret" />
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element ref="note-fret" />
+					<xs:element ref="note-string" maxOccurs="2" />
+				</xs:sequence>
+			</xs:choice>
 		</xs:complexType>
 	</xs:element>
 
