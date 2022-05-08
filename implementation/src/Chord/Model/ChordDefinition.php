@@ -5,9 +5,8 @@ namespace Chords\Chord\Model;
 
 use DomainException;
 use InvalidArgumentException;
-use Chords\Contracts\EquatableInterface;
 
-final class ChordDefinition implements EquatableInterface {
+final class ChordDefinition {
 	/**
 	 * @var int
 	 */
@@ -92,7 +91,9 @@ final class ChordDefinition implements EquatableInterface {
 
 		$this->fretOffset = $fretOffset;
 
-		$coords = array_map(function ($element) use ($strings, $frets, $fretOffset) {
+		$coords = [];
+
+		array_walk($notes, function ($element) use ($strings, $frets, $fretOffset, &$coords) {
 			if (!$element instanceof ChordNote) {
 				throw new InvalidArgumentException(sprintf(
 					'Argument $notes expected to contain only ChordNote elements, %s found.',
@@ -100,12 +101,14 @@ final class ChordDefinition implements EquatableInterface {
 				));
 			}
 
-			if ($element->getString() > $strings) {
-				throw new DomainException(sprintf(
-					'Maximum allowed value of "string" property of ChordNote is %d, you gave %d.',
-					$strings,
-					$element->getString()
-				));
+			foreach ($element->getString() as $string) {
+				if ($string > $strings) {
+					throw new DomainException(sprintf(
+						'Maximum allowed value of "string" property of ChordNote is %d, you gave %d.',
+						$strings,
+						$string
+					));
+				}
 			}
 
 			if ($element->getFret() > $frets) {
@@ -124,8 +127,10 @@ final class ChordDefinition implements EquatableInterface {
 				));
 			}
 
-			return sprintf('%d:%d', $element->getString(), $element->getFret());
-		}, $notes);
+			for ($i = $element->getString()[0]; $i <= ($element->getString()[1] ?? $element->getString()[0]); $i++) {
+				$coords[] = sprintf('%d:%d', $i, $element->getFret());
+			}
+		});
 
 		if (count($coords) !== count(array_unique($coords))) {
 			throw new DomainException('All elements in $notes must have unique coordinates.');
@@ -157,21 +162,5 @@ final class ChordDefinition implements EquatableInterface {
 		}
 
 		$this->marks = array_values($marks);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof ChordDefinition &&
-		       $this->getStrings() === $other->getStrings() &&
-		       $this->getFrets() === $other->getFrets() &&
-		       $this->getFretOffset() === $other->getFretOffset() &&
-		       count(array_udiff($this->getNotes(), $other->getNotes(), function (ChordNote $a, ChordNote $b) {
-		       	return $a->equals($b) ? 0 : ($a->getString() + $a->getFret() - $b->getString() - $b->getFret());
-		       })) === 0 &&
-		       count(array_udiff($this->getMarks(), $other->getMarks(), function (ChordMark $a, ChordMark $b) {
-		       	return $a->equals($b) ? 0 : ($a->getString() + - $b->getString());
-		       })) === 0;
 	}
 }

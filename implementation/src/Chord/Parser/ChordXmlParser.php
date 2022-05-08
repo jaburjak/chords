@@ -105,17 +105,22 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 
 		/** @var SimpleXMLElement $note */
 		foreach ($sxml->def->{'def-note'} as $note) {
-			$string = (string) $note->{'note-string'};
+			$strings = [];
 
-			if ($string === '') {
-				throw new InvalidXmlException('Missing or empty <note-string> element.');
+			/** @var SimpleXMLElement $string */
+			foreach ($note->{'note-string'} as $string) {
+				$string = (string) $string;
+
+				if ($string === '') {
+					throw new InvalidXmlException('Missing or empty <note-string> element.');
+				}
+
+				if (!is_numeric($string)) {
+					throw new InvalidXmlException('Encountered non-numeric value in <note-string>.');
+				}
+
+				$strings[] = intval($string);
 			}
-
-			if (!is_numeric($string)) {
-				throw new InvalidXmlException('Encountered non-numeric value in <note-string>.');
-			}
-
-			$string = intval($string);
 
 			$fret = (string) $note->{'note-fret'};
 
@@ -129,7 +134,7 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 
 			$fret = intval($fret);
 
-			$notes[] = new ChordNote($string, $fret);
+			$notes[] = new ChordNote($strings, $fret);
 		}
 
 		return $notes;

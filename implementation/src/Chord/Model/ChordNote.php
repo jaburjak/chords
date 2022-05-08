@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 namespace Chords\Chord\Model;
 
+use InvalidArgumentException;
 use DomainException;
-use Chords\Contracts\EquatableInterface;
 
-final class ChordNote implements EquatableInterface {
+final class ChordNote {
 	/**
-	 * @var int
+	 * @var int[]
 	 */
 	private $string;
 
@@ -17,7 +17,7 @@ final class ChordNote implements EquatableInterface {
 	 */
 	private $fret;
 
-	public function getString(): int {
+	public function getString(): array {
 		return $this->string;
 	}
 
@@ -25,9 +25,33 @@ final class ChordNote implements EquatableInterface {
 		return $this->fret;
 	}
 
-	public function __construct(int $string, int $fret) {
-		if ($string <= 0) {
-			throw new DomainException(sprintf('Argument $string must be greater than zero, you passed %d.', $string));
+	public function __construct(array $string, int $fret) {
+		if (count($string) !== 1 && count($string) !== 2) {
+			throw new InvalidArgumentException(sprintf(
+				'Array in argument $string must have one or two elements, you gave %d.',
+				count($string)
+			));
+		}
+
+		array_walk($string, function ($element) {
+			if (!is_int($element)) {
+				throw new InvalidArgumentException(sprintf(
+					'Argument $string expected to be an array of integers, %s found.',
+					gettype($element)
+				));
+			}
+
+			if ($element <= 0) {
+				throw new DomainException(sprintf('Numbers in argument $string must be greater than zero, you passed %d.', $element));
+			}
+		});
+
+		sort($string, \SORT_NUMERIC);
+
+		if (count($string) === 2) {
+			if ($string[0] === $string[1]) {
+				throw new DomainException(sprintf('Numbers in argument $string must be different.'));
+			}
 		}
 
 		$this->string = $string;
@@ -37,14 +61,5 @@ final class ChordNote implements EquatableInterface {
 		}
 
 		$this->fret = $fret;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof ChordNote &&
-		       $this->getString() === $other->getString() &&
-		       $this->getFret() === $other->getFret();
 	}
 }

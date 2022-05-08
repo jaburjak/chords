@@ -15,7 +15,7 @@ final class ChordXmlParserTest extends TestCase {
 	public function testValidXml($xml, $expected): void {
 		$parser = new ChordXmlParser();
 
-		$this->assertTrue($expected->equals($parser->parse($xml)));
+		$this->assertEquals($expected, $parser->parse($xml));
 	}
 
 	public function xmlProvider(): array {
@@ -74,9 +74,9 @@ XML
 						5,
 						0,
 						[
-							new ChordNote(6, 1),
-							new ChordNote(4, 2),
-							new ChordNote(5, 3)
+							new ChordNote([6], 1),
+							new ChordNote([4], 2),
+							new ChordNote([5], 3)
 						],
 						[
 							new ChordMark(1, ChordMark::TYPE_MUTED),
@@ -131,10 +131,10 @@ XML
 						12,
 						7,
 						[
-							new ChordNote(6, 8),
-							new ChordNote(5, 8),
-							new ChordNote(4, 9),
-							new ChordNote(3, 10)
+							new ChordNote([6], 8),
+							new ChordNote([5], 8),
+							new ChordNote([4], 9),
+							new ChordNote([3], 10)
 						],
 						[
 							new ChordMark(1, ChordMark::TYPE_MUTED),
@@ -373,7 +373,7 @@ XML
 	</def>
 </chord>
 XML
-				,'\Chords\Exception\InvalidXmlException'],
+				,'\InvalidArgumentException'],
 			'missing <note-fret>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
@@ -467,6 +467,45 @@ XML
 		</def-note>
 		<def-note>
 			<note-string>6</note-string>
+			<note-fret>1</note-fret>
+		</def-note>
+	</def>
+</chord>
+XML
+				,'\DomainException'],
+			'too many <def-note>' => [<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord>
+	<name>Dmi</name>
+	<def>
+		<def-strings>6</def-strings>
+		<def-frets>5</def-frets>
+		<def-note>
+			<note-string>1</note-string>
+			<note-string>3</note-string>
+			<note-string>6</note-string>
+			<note-fret>1</note-fret>
+		</def-note>
+	</def>
+</chord>
+XML
+				,'\InvalidArgumentException'],
+			'duplicate <def-note> with barre' => [<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord>
+	<name>Dmi</name>
+	<def>
+		<def-strings>6</def-strings>
+		<def-frets>5</def-frets>
+		<def-note>
+			<note-string>1</note-string>
+			<note-string>6</note-string>
+			<note-fret>1</note-fret>
+		</def-note>
+		<def-note>
+			<note-string>3</note-string>
 			<note-fret>1</note-fret>
 		</def-note>
 	</def>

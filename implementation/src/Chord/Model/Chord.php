@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace Chords\Chord\Model;
 
 use InvalidArgumentException;
-use Chords\Contracts\EquatableInterface;
 
-final class Chord implements EquatableInterface {
+final class Chord {
 	/**
 	 * @var string
 	 */
@@ -51,15 +50,5 @@ final class Chord implements EquatableInterface {
 		});
 
 		$this->alternativeNames = array_values($alternativeNames);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof Chord &&
-		       $this->getName() === $other->getName() &&
-		       count($this->getAlternativeNames()) === count(array_intersect($this->getAlternativeNames(), $other->getAlternativeNames())) &&
-		       $this->getDefinition()->equals($other->getDefinition());
 	}
 }

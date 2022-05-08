@@ -4,9 +4,8 @@ declare(strict_types=1);
 namespace Chords\Chord\Model;
 
 use DomainException;
-use Chords\Contracts\EquatableInterface;
 
-final class ChordMark implements EquatableInterface {
+final class ChordMark {
 	/**
 	 * @var string
 	 */
@@ -50,14 +49,5 @@ final class ChordMark implements EquatableInterface {
 		}
 
 		$this->type = $type;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function equals($other): bool {
-		return $other instanceof ChordMark &&
-		       $this->getString() === $other->getString() &&
-		       $this->getType() === $other->getType();
 	}
 }

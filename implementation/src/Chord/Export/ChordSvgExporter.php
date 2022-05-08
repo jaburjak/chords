@@ -35,6 +35,10 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 
 	private $noteRadius = 7;
 
+	private $barreHeight = 10;
+
+	private $barreRadius = 6;
+
 	private $offsetIndicatorSize = [
 		'width' => 20,
 		'height' => 18
@@ -129,14 +133,27 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 		}
 
 		foreach ($chord->getDefinition()->getNotes() as $note) {
-			$svg .= sprintf(
-				'<circle cx="%d" cy="%d" r="%d" style="fill: #000;" />',
-				$cellsOffset['x'] + ($note->getString() - 1) * $this->cellSize['width'],
-				$cellsOffset['y'] +
-					($note->getFret() - $chord->getDefinition()->getFretOffset() - 1) * $this->cellSize['height'] +
-					round($this->cellSize['height'] / 2),
-				$this->noteRadius
-			);
+			if (count($note->getString()) === 1) {
+				$svg .= sprintf(
+					'<circle cx="%d" cy="%d" r="%d" style="fill: #000;" />',
+					$cellsOffset['x'] + ($note->getString()[0] - 1) * $this->cellSize['width'],
+					$cellsOffset['y'] +
+						($note->getFret() - $chord->getDefinition()->getFretOffset() - 1) * $this->cellSize['height'] +
+						round($this->cellSize['height'] / 2),
+					$this->noteRadius
+				);
+			} else {
+				$svg .= sprintf(
+					'<rect x="%d" y="%d" width="%d" height="%d" rx="%d" style="fill: #000;" />',
+					$cellsOffset['x'] + ($note->getString()[0] - 1) * $this->cellSize['width'] - $this->noteRadius,
+					$cellsOffset['y'] +
+						($note->getFret() - $chord->getDefinition()->getFretOffset() - 1) * $this->cellSize['height'] +
+						round(($this->cellSize['height'] - $this->barreHeight) / 2),
+					($note->getString()[1] - $note->getString()[0]) * $this->cellSize['width'] + $this->noteRadius * 2,
+					$this->barreHeight,
+					$this->barreRadius
+				);
+			}
 		}
 
 		foreach ($chord->getDefinition()->getMarks() as $mark) {
