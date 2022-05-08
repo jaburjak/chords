@@ -8,21 +8,6 @@ use Chords\Chord\Model\Chord;
 use Chords\Chord\Model\ChordMark;
 
 final class ChordSvgExporter implements ChordSvgExporterInterface {
-	/**
-	 * @var int
-	 */
-	private $headerHeight = 16;
-
-	/**
-	 * @var int
-	 */
-	private $spacingX = 20;
-
-	/**
-	 * @var int
-	 */
-	private $spacingY = 20;
-
 	private $cellSize = [
 		'width' => 18,
 		'height' => 20

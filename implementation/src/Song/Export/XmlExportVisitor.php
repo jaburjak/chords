@@ -56,9 +56,7 @@ final class XmlExportVisitor implements VisitorInterface {
 	}
 
 	public function saveXml(): string {
-		$xml = $this->dom->saveXML();
-
-		return $xml;
+		return $this->dom->saveXML();
 	}
 
 	/**

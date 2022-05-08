@@ -45,6 +45,8 @@ final class SongLyricsXmlParser {
 						$strophes[$label] = $strophe;
 					}
 					break;
+				default:
+					break;
 			}
 		}
 

@@ -44,7 +44,7 @@ final class Chord {
 			if (!is_string($name)) {
 				throw new InvalidArgumentException(sprintf(
 					'Argument $alternativeNames expected to contain only string elements, %s found.',
-					gettype($element)
+					gettype($name)
 				));
 			}
 		});

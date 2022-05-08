@@ -48,10 +48,8 @@ final class ChordNote {
 
 		sort($string, \SORT_NUMERIC);
 
-		if (count($string) === 2) {
-			if ($string[0] === $string[1]) {
-				throw new DomainException(sprintf('Numbers in argument $string must be different.'));
-			}
+		if (count($string) === 2 && $string[0] === $string[1]) {
+			throw new DomainException(sprintf('Numbers in argument $string must be different.'));
 		}
 
 		$this->string = $string;

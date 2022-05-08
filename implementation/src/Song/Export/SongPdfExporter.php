@@ -41,7 +41,7 @@ final class SongPdfExporter implements SongPdfExporterInterface {
 
 		$columns = $options->getColumns();
 
-		if ($columns < 1 or $columns > 4) {
+		if ($columns < 1 || $columns > 4) {
 			throw new UnexpectedValueException('Option "columns" must be greater than zero and less than five.');
 		}
 
@@ -287,7 +287,7 @@ HTML
 			case PdfExportOptions::FONT_BIGGER:
 				return '12pt';
 			default:
-				throw new UnexpectedValueException(sprintf('Unsupported font size "%s".', $options->getFontSize()));
+				throw new UnexpectedValueException(sprintf('Unsupported font size "%s".', $fontSize));
 		}
 	}
 

@@ -59,6 +59,14 @@ final class ChordDefinition {
 	}
 
 	public function __construct(int $strings, int $frets, int $fretOffset, array $notes, array $marks) {
+		$this->strings = $this->validateStrings($strings);
+		$this->frets = $this->validateFrets($frets);
+		$this->fretOffset = $this->validateFretOffset($fretOffset);
+		$this->notes = $this->validateNotes($notes);
+		$this->marks = $this->validateMarks($marks);
+	}
+
+	private function validateStrings(int $strings): int {
 		if ($strings <= 0) {
 			throw new DomainException(sprintf(
 				'Argument $strings must be greater than zero, you passed %d.',
@@ -66,14 +74,18 @@ final class ChordDefinition {
 			));
 		}
 
-		$this->strings = $strings;
+		return $strings;
+	}
 
+	private function validateFrets(int $frets): int {
 		if ($frets <= 0) {
 			throw new DomainException(sprintf('Argument $frets must be greater than zero, you passed %d.', $frets));
 		}
 
-		$this->frets = $frets;
+		return $frets;
+	}
 
+	private function validateFretOffset(int $fretOffset): int {
 		if ($fretOffset < 0) {
 			throw new DomainException(sprintf(
 				'Argument $fretOffset must be greater or equal to zero, you passed %d.',
@@ -81,19 +93,21 @@ final class ChordDefinition {
 			));
 		}
 
-		if ($frets <= $fretOffset) {
+		if ($this->frets <= $fretOffset) {
 			throw new DomainException(sprintf(
 				'Argument $frets must be greater than $fretOffset, %d is not greater than %d.',
-				$frets,
+				$this->frets,
 				$fretOffset
 			));
 		}
 
-		$this->fretOffset = $fretOffset;
+		return $fretOffset;
+	}
 
+	private function validateNotes(array $notes): array {
 		$coords = [];
 
-		array_walk($notes, function ($element) use ($strings, $frets, $fretOffset, &$coords) {
+		array_walk($notes, function ($element) use (&$coords) {
 			if (!$element instanceof ChordNote) {
 				throw new InvalidArgumentException(sprintf(
 					'Argument $notes expected to contain only ChordNote elements, %s found.',
@@ -102,28 +116,28 @@ final class ChordDefinition {
 			}
 
 			foreach ($element->getString() as $string) {
-				if ($string > $strings) {
+				if ($string > $this->strings) {
 					throw new DomainException(sprintf(
 						'Maximum allowed value of "string" property of ChordNote is %d, you gave %d.',
-						$strings,
+						$this->strings,
 						$string
 					));
 				}
 			}
 
-			if ($element->getFret() > $frets) {
+			if ($element->getFret() > $this->frets) {
 				throw new DomainException(sprintf(
 					'Maximum allowed value of "fret" property of ChordNote is %d, you gave %d.',
-					$frets,
+					$this->frets,
 					$element->getFret()
 				));
 			}
 
-			if ($element->getFret() <= $fretOffset) {
+			if ($element->getFret() <= $this->fretOffset) {
 				throw new DomainException(sprintf(
 					'Property "fret" of ChordNote must be greater than $fretOffset, %d is not greater than %d.',
 					$element->getFret(),
-					$fretOffset
+					$this->fretOffset
 				));
 			}
 
@@ -136,9 +150,11 @@ final class ChordDefinition {
 			throw new DomainException('All elements in $notes must have unique coordinates.');
 		}
 
-		$this->notes = array_values($notes);
+		return array_values($notes);
+	}
 
-		$coords = array_map(function ($element) use ($strings) {
+	private function validateMarks(array $marks): array {
+		$coords = array_map(function ($element) {
 			if (!$element instanceof ChordMark) {
 				throw new InvalidArgumentException(sprintf(
 					'Argument $marks expected to contain only ChordMark elements, %s found.',
@@ -146,10 +162,10 @@ final class ChordDefinition {
 				));
 			}
 
-			if ($element->getString() > $strings) {
+			if ($element->getString() > $this->strings) {
 				throw new DomainException(sprintf(
 					'Maximum allowed value of "string" property of ChordMark is %d, you gave %d.',
-					$strings,
+					$this->strings,
 					$element->getString()
 				));
 			}
@@ -161,6 +177,6 @@ final class ChordDefinition {
 			throw new DomainException('All elements in $marks must have unique coordinates.');
 		}
 
-		$this->marks = array_values($marks);
+		return array_values($marks);
 	}
 }

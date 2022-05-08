@@ -212,22 +212,20 @@ final class HtmlExportVisitor implements VisitorInterface {
 
 		if ($this->label !== null) {
 			if ($this->repeat !== null) {
-				$label = sprintf(self::STROPHE_LABEL_REPEAT_FORMAT, $this->label, $this->repeat);
+				$formattedLabel = sprintf(self::STROPHE_LABEL_REPEAT_FORMAT, $this->label, $this->repeat);
 			} else {
-				$label = sprintf(self::STROPHE_LABEL_FORMAT, $this->label);
+				$formattedLabel = sprintf(self::STROPHE_LABEL_FORMAT, $this->label);
 			}
 
 			$this->row['chords'][] = null;
 			$this->row['text'][] = [
-				'text' => $label,
+				'text' => $formattedLabel,
 				'className' => self::STROPHE_LABEL_CLASSNAME
 			];
 
 			$this->label = $this->repeat = null;
 		} else if ($this->repeat !== null) {
-			$repeat = new Repeat($verse->getNodes(), $this->repeat);
-
-			$nodes = [$repeat];
+			$nodes = [new Repeat($verse->getNodes(), $this->repeat)];
 		}
 
 		foreach ($nodes as $node) {

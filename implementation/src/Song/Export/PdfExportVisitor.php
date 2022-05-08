@@ -275,29 +275,27 @@ final class PdfExportVisitor implements VisitorInterface {
 
 		if ($this->label !== null) {
 			if ($this->repeat !== null) {
-				$label = sprintf(self::STROPHE_LABEL_REPEAT_FORMAT, $this->label, $this->repeat);
+				$formattedLabel = sprintf(self::STROPHE_LABEL_REPEAT_FORMAT, $this->label, $this->repeat);
 			} else {
-				$label = sprintf(self::STROPHE_LABEL_FORMAT, $this->label);
+				$formattedLabel = sprintf(self::STROPHE_LABEL_FORMAT, $this->label);
 			}
 
 			$this->row[] = [
 				'chord' => '',
-				'text' => $label,
+				'text' => $formattedLabel,
 				'className' => self::STROPHE_LABEL_CLASSNAME
 			];
 
 			$this->label = $this->repeat = null;
 		} else if ($this->repeat !== null) {
-			$repeat = new Repeat($verse->getNodes(), $this->repeat);
-
-			$nodes = [$repeat];
+			$nodes = [new Repeat($verse->getNodes(), $this->repeat)];
 		}
 
 		foreach ($nodes as $node) {
 			$node->accept($this);
 		}
 
-		$html = '';
+		$verseHtml = '';
 
 		foreach ($this->row as $cell) {
 			// force hard spaces at the beginning and end of an element,
@@ -311,22 +309,22 @@ final class PdfExportVisitor implements VisitorInterface {
 				$class .= ' '.$cell['className'];
 			}
 
-			$html .= sprintf('<div class="%s">', htmlspecialchars($class));
+			$verseHtml .= sprintf('<div class="%s">', htmlspecialchars($class));
 
 			if ($this->hasChords) {
-				$html .= sprintf('<span class="%s">%s</span>', htmlspecialchars(self::CHORD_CLASSNAME), htmlspecialchars($cell['chord']));
-				$html .= '<br>';
+				$verseHtml .= sprintf('<span class="%s">%s</span>', htmlspecialchars(self::CHORD_CLASSNAME), htmlspecialchars($cell['chord']));
+				$verseHtml .= '<br>';
 
 				if ($cell['chord'] !== '' && $text === '') {
 					$text = ' ';
 				}
 			}
 
-			$html .= sprintf('<span class="%s">%s</span>', htmlspecialchars(self::TEXT_CLASSNAME), htmlspecialchars($text));
-			$html .= '</div>';
+			$verseHtml .= sprintf('<span class="%s">%s</span>', htmlspecialchars(self::TEXT_CLASSNAME), htmlspecialchars($text));
+			$verseHtml .= '</div>';
 		}
 
-		$this->html[] = sprintf('<div class="%s">%s</div>', htmlspecialchars(self::VERSE_CLASSNAME), $html);
+		$this->html[] = sprintf('<div class="%s">%s</div>', htmlspecialchars(self::VERSE_CLASSNAME), $verseHtml);
 
 		$this->row = null;
 		$this->hasChords = false;
