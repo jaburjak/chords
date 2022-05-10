@@ -1,5 +1,6 @@
 stages:
   - test
+  - package
 
 test:
   stage: test
@@ -10,3 +11,19 @@ test:
     - composer install --prefer-dist --no-ansi --no-interaction --no-progress
   script:
     - ./vendor/bin/phpunit
+
+package:
+  stage: package
+  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  before_script:
+    - sudo chown -R "$(id -un):$(id -gn)" .
+  script:
+    - cd implementation
+    - zip -q -r ../package.zip .
+  after_script:
+    - mv package.zip "chords-$CI_COMMIT_REF_SLUG.zip"
+  when: always
+  artifacts:
+    paths:
+      - chords-$CI_COMMIT_REF_SLUG.zip
+    expire_in: 1 month
