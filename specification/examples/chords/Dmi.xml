@@ -8,8 +8,8 @@
 		<def-strings>6</def-strings>
 		<def-frets>5</def-frets>
 		<def-note>
-			<note-string>6</note-string> <!-- left to right, starts with 1 -->
-			<note-fret>1</note-fret> <!-- top to bottom, starts with 1 -->
+			<note-string>6</note-string>
+			<note-fret>1</note-fret>
 		</def-note>
 		<def-note>
 			<note-string>4</note-string>
