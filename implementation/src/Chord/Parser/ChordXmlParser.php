@@ -1,8 +1,14 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Chord\Parser;
 
+use DomainException;
+use InvalidArgumentException;
 use SimpleXMLElement;
 use Chords\Chord\Model\Chord;
 use Chords\Chord\Model\ChordDefinition;
@@ -10,7 +16,15 @@ use Chords\Chord\Model\ChordMark;
 use Chords\Chord\Model\ChordNote;
 use Chords\Exception\InvalidXmlException;
 
+/**
+ * Chord 1.0 XML document parser.
+ *
+ * @package Chords\Chord\Parser
+ */
 final class ChordXmlParser implements ChordXmlParserInterface {
+	/**
+	 * @inheritdoc
+	 */
 	public function parse(string $xml): Chord {
 		try {
 			$sxml = @simplexml_load_string($xml);
@@ -36,7 +50,11 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 	}
 
 	/**
-	 * @return string[]
+	 * Extracts alternative chord names from the XML.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return string[] alternative chord names
+	 * @throws InvalidXmlException
 	 */
 	private function parseAlternativeNames(SimpleXMLElement $sxml): array {
 		$alternativeNames = [];
@@ -59,6 +77,15 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 		return $alternativeNames;
 	}
 
+	/**
+	 * Parses chord definition.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return ChordDefinition chord definition
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseDefinition(SimpleXMLElement $sxml): ChordDefinition {
 		$strings = (string) $sxml->def->{'def-strings'};
 
@@ -98,7 +125,13 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 	}
 
 	/**
-	 * @return ChordNote[]
+	 * Extracts chord notes from the document.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return ChordNote[] chord notes
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
 	 */
 	private function parseNotes(SimpleXMLElement $sxml): array {
 		$notes = [];
@@ -141,7 +174,12 @@ final class ChordXmlParser implements ChordXmlParserInterface {
 	}
 
 	/**
-	 * @return ChordMark[]
+	 * Extracts chord marks from the document.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return ChordMark[] chord marks
+	 * @throws InvalidXmlException
+	 * @throws DomainException
 	 */
 	private function parseMarks(SimpleXMLElement $sxml): array {
 		$marks = [];

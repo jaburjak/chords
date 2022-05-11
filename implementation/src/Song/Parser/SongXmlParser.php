@@ -1,15 +1,29 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Parser;
 
+use DomainException;
+use InvalidArgumentException;
 use SimpleXMLElement;
 use Chords\Exception\InvalidXmlException;
 use Chords\Song\Model\Song;
 use Chords\Song\Model\SongInfo;
 use Chords\Song\Model\SongLyrics;
 
+/**
+ * Song 1.0 XML document parser.
+ *
+ * @package Chords\Song\Parser
+ */
 final class SongXmlParser implements SongXmlParserInterface {
+	/**
+	 * @inheritdoc
+	 */
 	public function parse(string $xml): Song {
 		libxml_use_internal_errors(true);
 
@@ -35,6 +49,13 @@ final class SongXmlParser implements SongXmlParserInterface {
 		return new Song($this->parseInfo($sxml), $this->parseLyrics($sxml));
 	}
 
+	/**
+	 * Parses song metadata.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return SongInfo metadata
+	 * @throws InvalidXmlException
+	 */
 	private function parseInfo(SimpleXMLElement $sxml): SongInfo {
 		if (!isset($sxml->info)) {
 			throw new InvalidXmlException('Missing <info> element.');
@@ -45,6 +66,15 @@ final class SongXmlParser implements SongXmlParserInterface {
 		return $parser->parse($sxml->info);
 	}
 
+	/**
+	 * Parses song lyrics.
+	 *
+	 * @param SimpleXMLElement $sxml XML document
+	 * @return SongLyrics lyrics
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseLyrics(SimpleXMLElement $sxml): SongLyrics {
 		if (!isset($sxml->lyrics)) {
 			throw new InvalidXmlException('Missing <lyrics> element.');

@@ -1,11 +1,15 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Export;
 
-use \BadMethodCallException;
-use \RuntimeException;
-use \UnexpectedValueException;
+use BadMethodCallException;
+use RuntimeException;
+use UnexpectedValueException;
 use Chords\Song\Model\Chord;
 use Chords\Song\Model\Paragraph;
 use Chords\Song\Model\Repeat;
@@ -17,53 +21,138 @@ use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
 
+/**
+ * Transforms a song into HTML code.
+ *
+ * @package Chords\Song\Export
+ */
 final class HtmlExportVisitor implements VisitorInterface {
+	/**
+	 * HTML class of a chord element.
+	 *
+	 * @var string
+	 */
 	private const CHORD_CLASSNAME = 'chord';
 
+	/**
+	 * HTML class of a paragraph.
+	 *
+	 * @var string
+	 */
 	private const PARAGRAPH_CLASSNAME = 'song-paragraph';
 
+	/**
+	 * HTML class of a repeat marker.
+	 *
+	 * @var string
+	 */
 	private const REPEAT_CLASSNAME = 'repeat-marker';
 
+	/**
+	 * Repeat marker start.
+	 *
+	 * @var string
+	 */
 	private const REPEAT_START = '[: ';
 
+	/**
+	 * Repeat marker end.
+	 *
+	 * @var string
+	 */
 	private const REPEAT_END = ' :]';
 
+	/**
+	 * Repeat count formatting string.
+	 *
+	 * @var string
+	 */
 	private const REPEAT_COUNT_FORMAT = '%d×';
 
+	/**
+	 * Default repeat count.
+	 *
+	 * @var int
+	 */
 	private const REPEAT_COUNT_DEFAULT = 2;
 
+	/**
+	 * HTML class of strophe label.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_LABEL_CLASSNAME = 'strophe-label';
 
+	/**
+	 * Strophe label formatting string.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_LABEL_FORMAT = '%s ';
 
+	/**
+	 * Strophe label with repeat indicator formatting string.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_LABEL_REPEAT_FORMAT = '%s (%d×) ';
 
+	/**
+	 * Strophe reference formatting string.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_REFERENCE_FORMAT = '%s';
 
+	/**
+	 * Strophe reference with repeat indicator formatting string.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_REFERENCE_REPEAT_FORMAT = '%s %d×';
 
+	/**
+	 * HTML class of strophe reference.
+	 *
+	 * @var string
+	 */
 	private const STROPHE_REFERENCE_CLASSNAME = 'strophe-reference';
 
 	/**
+	 * Lines of HTML code.
+	 *
 	 * @var string[]
 	 */
 	private $html = [];
 
 	/**
-	 * @var array|null
+	 * Chunks in the current line.
+	 *
+	 * Contains arrays with `chord` and `text` keys.
+	 *
+	 * @var array[]|null
 	 */
 	private $row = null;
 
 	/**
+	 * Repeat count of the currently processed node.
+	 *
 	 * @var int|null
 	 */
 	private $repeat = null;
 
 	/**
+	 * Label of the currently processed strophe.
+	 *
 	 * @var string|null
 	 */
 	private $label = null;
 
+	/**
+	 * Returns the built HTML.
+	 *
+	 * @return string HTML
+	 */
 	public function saveHtml(): string {
 		return implode('', $this->html);
 	}

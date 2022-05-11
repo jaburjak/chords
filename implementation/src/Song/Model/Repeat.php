@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Model;
@@ -6,13 +10,22 @@ namespace Chords\Song\Model;
 use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
+/**
+ * Repeat block.
+ *
+ * @package Chords\Song\Model
+ */
 final class Repeat implements NodeContainer {
 	/**
+	 * Repeated content.
+	 *
 	 * @var Node[]
 	 */
 	private $nodes;
 
 	/**
+	 * How many times the contents should be repeated.
+	 *
 	 * @var int
 	 */
 	private $count;
@@ -24,10 +37,17 @@ final class Repeat implements NodeContainer {
 		return $this->nodes;
 	}
 
+	/**
+	 * @return int repeat count
+	 */
 	public function getCount(): int {
 		return $this->count;
 	}
 
+	/**
+	 * @param Node[] $nodes repeated content
+	 * @param int    $count repeat count
+	 */
 	public function __construct(array $nodes, int $count) {
 		array_walk($nodes, function ($node, $index) {
 			if (!$node instanceof Node) {

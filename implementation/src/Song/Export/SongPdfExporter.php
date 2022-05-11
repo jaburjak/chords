@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Export;
@@ -12,21 +16,59 @@ use Dompdf\Dompdf;
 use setasign\Fpdi\Fpdi;
 use setasign\Fpdi\PdfReader;
 
+/**
+ * Transforms song into printable PDF document.
+ *
+ * @package Chords\Song\Export
+ */
 final class SongPdfExporter implements SongPdfExporterInterface {
+	/**
+	 * Space between columns.
+	 *
+	 * @var int
+	 */
 	private const COLUMN_SPACE = 10;
 
+	/**
+	 * Height of page header.
+	 *
+	 * @var int
+	 */
 	private const HEADER_HEIGHT = 80;
 
+	/**
+	 * Top page margin.
+	 *
+	 * @var int
+	 */
 	private const MARGIN_TOP = 20;
 
+	/**
+	 * Bottom page margin.
+	 *
+	 * @var int
+	 */
 	private const MARGIN_BOTTOM = 20;
 
+	/**
+	 * Left page margin.
+	 *
+	 * @var int
+	 */
 	private const MARGIN_LEFT = 40;
 
+	/**
+	 * Right page margin.
+	 *
+	 * @var int
+	 */
 	private const MARGIN_RIGHT = 40;
 
 	private const TEMP_EXCEPTION_MESSAGE = 'Could not save temporary PDF file.';
 
+	/**
+	 * @inheritdoc
+	 */
 	public function toPdf(Song $song, PdfExportOptions $options): string {
 		switch ($options->getPaperSize()) {
 			case PdfExportOptions::PAPER_A4:
@@ -101,6 +143,17 @@ final class SongPdfExporter implements SongPdfExporterInterface {
 		return $pdf->Output('S');
 	}
 
+	/**
+	 * Creates a PDF file with song lyrics.
+	 *
+	 * Each page in the created file corresponds to a single column.
+	 *
+	 * @param SongLyrics       $lyrics       lyrics
+	 * @param PdfExportOptions $options      export settings
+	 * @param float            $columnWidth  width of a column
+	 * @param float            $columnHeight height of a column
+	 * @return string path to PDF file
+	 */
 	private function buildText(SongLyrics $lyrics, PdfExportOptions $options, float $columnWidth,
 	                           float $columnHeight): string {
 		$html = <<<HTML
@@ -162,6 +215,16 @@ HTML
 		return $file;
 	}
 
+	/**
+	 * Creates a PDF file with song title.
+	 *
+	 * Song title includes large song name and all provided metadata.
+	 *
+	 * @param SongLyrics       $lyrics    lyrics
+	 * @param PdfExportOptions $options   export settings
+	 * @param float            $pageWidth width of the page
+	 * @return string path to PDF file
+	 */
 	private function buildTitle(SongInfo $info, PdfExportOptions $options, float $pageWidth): string {
 		$html = <<<HTML
 <!DOCTYPE html>
@@ -214,7 +277,17 @@ HTML
 		return $file;
 	}
 
-		private function buildHeader(SongInfo $info, PdfExportOptions $options, float $pageWidth): string {
+	/**
+	 * Creates a PDF file with song header.
+	 *
+	 * Song header includes a small song name and author.
+	 *
+	 * @param SongLyrics       $lyrics    lyrics
+	 * @param PdfExportOptions $options   export settings
+	 * @param float            $pageWidth width of the page
+	 * @return string path to PDF file
+	 */
+	private function buildHeader(SongInfo $info, PdfExportOptions $options, float $pageWidth): string {
 		$html = <<<HTML
 <!DOCTYPE html>
 <html>
@@ -278,6 +351,12 @@ HTML
 		return $file;
 	}
 
+	/**
+	 * Converts font size option to points.
+	 *
+	 * @param string $fontSize font size
+	 * @return string size in points
+	 */
 	private function fontSizeToPoints(string $fontSize): string {
 		switch ($fontSize) {
 			case PdfExportOptions::FONT_SMALLER:
@@ -291,6 +370,11 @@ HTML
 		}
 	}
 
+	/**
+	 * Returns random temporary file name.
+	 *
+	 * @return string file path
+	 */
 	private function getTempFile(): string {
 		return sprintf('%s/%s.pdf', sys_get_temp_dir(), md5(microtime(true).strval(rand())));
 	}

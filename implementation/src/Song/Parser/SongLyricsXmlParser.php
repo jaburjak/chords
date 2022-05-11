@@ -1,8 +1,13 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Parser;
 
+use DomainException;
 use DOMElement;
 use InvalidArgumentException;
 use SimpleXMLElement;
@@ -17,7 +22,21 @@ use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
 
+/**
+ * Song lyrics XML parser.
+ *
+ * @package Chords\Song\Parser
+ */
 final class SongLyricsXmlParser {
+	/**
+	 * Parses song lyrics.
+	 *
+	 * @param SimpleXMLElement $sxml lyrics element
+	 * @return SongLyrics parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	public function parse(SimpleXMLElement $sxml): SongLyrics {
 		$labeled = $this->extractLabeledStrophes($sxml);
 
@@ -25,7 +44,15 @@ final class SongLyricsXmlParser {
 	}
 
 	/**
-	 * @return Strophe[]
+	 * Returns strophes with a label.
+	 *
+	 * The keys of the returned array are strophe labels.
+	 *
+	 * @param SimpleXMLElement $sxml lyrics element
+	 * @return Strophe[] labeled strophes
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
 	 */
 	private function extractLabeledStrophes(SimpleXMLElement $sxml): array {
 		/** @var Strophe[] $strophes */
@@ -54,7 +81,14 @@ final class SongLyricsXmlParser {
 	}
 
 	/**
-	 * @return Node[]
+	 * Parses song lyrics.
+	 *
+	 * @param SimpleXMLElement $sxml            lyrics element
+	 * @param Strophe[]        $labeledStrophes already parsed strophes with labels
+	 * @return Node[] lyrics content
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
 	 */
 	private function parseLyrics(SimpleXMLElement $sxml, array $labeledStrophes): array {
 		$nodes = [];
@@ -91,6 +125,15 @@ final class SongLyricsXmlParser {
 		return $nodes;
 	}
 
+	/**
+	 * Parses a strophe.
+	 *
+	 * @param SimpleXMLElement $sxml strophe element
+	 * @return Strophe parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseStrophe(SimpleXMLElement $sxml): Strophe {
 		/** @var string|null $label */
 		$label = (string) ($sxml['label'] ?? '');
@@ -118,6 +161,15 @@ final class SongLyricsXmlParser {
 		return new Strophe($nodes, $label);
 	}
 
+	/**
+	 * Parses a paragraph.
+	 *
+	 * @param SimpleXMLElement $sxml paragraph element
+	 * @return Paragraph parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseParagraph(SimpleXMLElement $sxml): Paragraph {
 		/** @var Node[] $nodes */
 		$nodes = [];
@@ -138,6 +190,15 @@ final class SongLyricsXmlParser {
 		return new Paragraph($nodes);
 	}
 
+	/**
+	 * Parses a verse.
+	 *
+	 * @param SimpleXMLElement $sxml verse element
+	 * @return Verse parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseVerse(SimpleXMLElement $sxml): Verse {
 		$dom = dom_import_simplexml($sxml);
 
@@ -164,6 +225,14 @@ final class SongLyricsXmlParser {
 		return new Verse($nodes);
 	}
 
+	/**
+	 * Parses a chord.
+	 *
+	 * @param DOMElement $dom chord element
+	 * @return Chord parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 */
 	private function parseChord(DOMElement $dom): Chord {
 		switch (mb_strtolower((string) $dom->getAttribute('print'))) {
 			case '':
@@ -182,6 +251,16 @@ final class SongLyricsXmlParser {
 		return new Chord($dom->textContent, $print);
 	}
 
+	/**
+	 * Parses a repeat element.
+	 *
+	 * @param SimpleXMLElement $sxml    repeat element
+	 * @param array            $context context where the repeat element appeared
+	 * @return Strophe parsed object
+	 * @throws InvalidXmlException
+	 * @throws InvalidArgumentException
+	 * @throws DomainException
+	 */
 	private function parseRepeat(SimpleXMLElement $sxml, array $context): Repeat {
 		$count = $sxml['count'] ?? null;
 

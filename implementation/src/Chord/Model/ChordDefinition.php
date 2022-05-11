@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Chord\Model;
@@ -6,58 +10,91 @@ namespace Chords\Chord\Model;
 use DomainException;
 use InvalidArgumentException;
 
+/**
+ * Chord definition.
+ *
+ * @package Chords\Chord\Model
+ */
 final class ChordDefinition {
 	/**
+	 * Number of strings.
+	 *
 	 * @var int
 	 */
 	private $strings;
 
 	/**
+	 * How many frets from the beginning to ignore.
+	 *
 	 * @var int
 	 */
 	private $fretOffset;
 
 	/**
+	 * Number of frets.
+	 *
+	 * This must include {@see ChordDefinition::$fretOffset}, i.e. frets must be greater than offset.
+	 *
 	 * @var int
 	 */
 	private $frets;
 
 	/**
+	 * Notes in the chord.
+	 *
 	 * @var ChordNote[]
 	 */
 	private $notes;
 
 	/**
+	 * String marks.
+	 *
 	 * @var ChordMark[]
 	 */
 	private $marks;
 
+	/**
+	 * @return int number of strings
+	 */
 	public function getStrings(): int {
 		return $this->strings;
 	}
 
+	/**
+	 * @return int number of skipped frets
+	 */
 	public function getFretOffset(): int {
 		return $this->fretOffset;
 	}
 
+	/**
+	 * @return int number of frets
+	 */
 	public function getFrets(): int {
 		return $this->frets;
 	}
 
 	/**
-	 * @return iterable<ChordNote>
+	 * @return iterable<ChordNote> notes
 	 */
 	public function getNotes(): iterable {
 		return $this->notes;
 	}
 
 	/**
-	 * @return iterable<ChordMark>
+	 * @return iterable<ChordMark> string marks
 	 */
 	public function getMarks(): iterable {
 		return $this->marks;
 	}
 
+	/**
+	 * @param int         $strings    number of strings
+	 * @param int         $frets      number of frets
+	 * @param int         $fretOffset skipped frets
+	 * @param ChordNote[] $notes      notes
+	 * @param ChordMark[] $marks      string marks
+	 */
 	public function __construct(int $strings, int $frets, int $fretOffset, array $notes, array $marks) {
 		$this->strings = $this->validateStrings($strings);
 		$this->frets = $this->validateFrets($frets);

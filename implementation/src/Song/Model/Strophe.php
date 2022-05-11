@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Model;
@@ -6,31 +10,43 @@ namespace Chords\Song\Model;
 use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
+/**
+ * Strophe.
+ *
+ * @package Chords\Song\Model
+ */
 final class Strophe implements NodeContainer {
 	/**
+	 * Strophe content.
+	 *
 	 * @var Node[]
 	 */
 	private $nodes;
 
 	/**
+	 * Strophe label.
+	 *
 	 * @var string|null
 	 */
 	private $label;
 
 	/**
-	 * @return Node[]
+	 * @inheritdoc
 	 */
 	public function getNodes(): array {
 		return $this->nodes;
 	}
 
+	/**
+	 * @return string|null label
+	 */
 	public function getLabel(): ?string {
 		return $this->label;
 	}
 
 	/**
-	 * @param Node[] $nodes
-	 * @param string|null $label
+	 * @param Node[]      $nodes content
+	 * @param string|null $label label
 	 */
 	public function __construct(array $nodes, ?string $label) {
 		array_walk($nodes, function ($node, $index) {

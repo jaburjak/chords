@@ -1,12 +1,16 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Export;
 
-use \DOMDocument;
-use \DOMImplementation;
-use \SplStack;
-use \UnexpectedValueException;
+use DOMDocument;
+use DOMImplementation;
+use SplStack;
+use UnexpectedValueException;
 use Chords\Song\Model\Chord;
 use Chords\Song\Model\Paragraph;
 use Chords\Song\Model\Repeat;
@@ -18,25 +22,70 @@ use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
 
+/**
+ * Saves a song as a Song 1.0 XML document.
+ *
+ * @package Chords\Song\Export
+ */
 final class XmlExportVisitor implements VisitorInterface {
+	/**
+	 * Version of the XML (not Song) specification.
+	 *
+	 * @var string
+	 */
 	private const XML_VERSION = '1.0';
 
+	/**
+	 * Document encoding.
+	 *
+	 * @var string
+	 */
 	private const XML_ENCODING = 'UTF-8';
 
-	private const DTD_PUBLIC = '-//JABURJAK//DTD Chord 1.0//EN';
+	/**
+	 * Public DTD identifier of a Song 1.0 document.
+	 *
+	 * @var string
+	 */
+	private const DTD_PUBLIC = '-//JABURJAK//DTD Song 1.0//EN';
 
+	/**
+	 * System DTD identifier of a Song 1.0 document.
+	 *
+	 * @var string
+	 */
 	private const DTD_SYSTEM = 'https://chords.jaburjak.cz/dtd/song-1.dtd';
 
+	/**
+	 * URI of the Song 1.0 XML schema.
+	 *
+	 * @var string
+	 */
 	private const XML_NAMESPACE = 'https://chords.jaburjak.cz/schema/song-1.xsd';
 
+	/**
+	 * Default value of `count` attribute of `<repeat>`.
+	 *
+	 * @var int
+	 */
 	private const REPEAT_COUNT_DEFAULT = 2;
 
 	/**
+	 * XML document.
+	 *
 	 * @var DOMDocument
 	 */
 	private $dom;
 
 	/**
+	 * Current hierarchical structure of the built XML.
+	 *
+	 * Example: At the bottom of the stack is `<song>`. When `<lyrics>` starts to get processed, it is added onto the
+	 * stack. When a `<strophe>` starts to get processed, it is added onto the stack. Same for other elements, lets say
+	 * it ends with `<verse>`. When the verse is processed, it is removed from the stack and another can be added. When
+	 * the entire paragraph is processed, it is removed from the stack and another one can be added onto the strophe
+	 * that has come to the top of the stack.
+	 *
 	 * @var SplStack
 	 */
 	private $fragmentStack;

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Chord\Model;
@@ -6,25 +10,47 @@ namespace Chords\Chord\Model;
 use InvalidArgumentException;
 use DomainException;
 
+/**
+ * Chord note.
+ *
+ * @package Chords\Chord\Model
+ */
 final class ChordNote {
 	/**
+	 * String number.
+	 *
+	 * A regular note will have only one element in the array. If two integers are present, the note is barre and the
+	 * numbers indicate the first and last string that are part of the barre.
+	 *
 	 * @var int[]
 	 */
 	private $string;
 
 	/**
+	 * Fret number.
+	 *
 	 * @var int
 	 */
 	private $fret;
 
+	/**
+	 * @return int[] string number
+	 */
 	public function getString(): array {
 		return $this->string;
 	}
 
+	/**
+	 * @return int fret number
+	 */
 	public function getFret(): int {
 		return $this->fret;
 	}
 
+	/**
+	 * @param int[] $string string number
+	 * @param int   $fret   fret number
+	 */
 	public function __construct(array $string, int $fret) {
 		if (count($string) !== 1 && count($string) !== 2) {
 			throw new InvalidArgumentException(sprintf(

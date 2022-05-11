@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Chord\Export;
@@ -7,35 +11,85 @@ use UnexpectedValueException;
 use Chords\Chord\Model\Chord;
 use Chords\Chord\Model\ChordMark;
 
+/**
+ * Transforms a chord into an SVG image.
+ *
+ * @package Chords\Chord\Export
+ */
 final class ChordSvgExporter implements ChordSvgExporterInterface {
+	/**
+	 * Size of a single cell in the grid.
+	 *
+	 * @var int[]
+	 */
 	private $cellSize = [
 		'width' => 18,
 		'height' => 20
 	];
 
+	/**
+	 * Height of overflow indication after of before the requested number of frets.
+	 *
+	 * @var int[]
+	 */
 	private $cellOverflow = [
 		'top' => 8,
 		'bottom' => 10
 	];
 
+	/**
+	 * Radius of the circle depicting a note.
+	 *
+	 * @var int
+	 */
 	private $noteRadius = 7;
 
+	/**
+	 * Height of the barre bar.
+	 *
+	 * @var int
+	 */
 	private $barreHeight = 10;
 
+	/**
+	 * Border radius of the barre bar.
+	 *
+	 * @var int
+	 */
 	private $barreRadius = 6;
 
+	/**
+	 * Space reserved for the fret offset number.
+	 *
+	 * @var int[]
+	 */
 	private $offsetIndicatorSize = [
 		'width' => 20,
 		'height' => 18
 	];
 
+	/**
+	 * Margin between the grid and fret offset number.
+	 *
+	 * @var int
+	 */
 	private $offsetIndicatorMargin = 10;
 
+	/**
+	 * Size of a string mark.
+	 *
+	 * @var int[]
+	 */
 	private $markSize = [
 		'width' => 12,
 		'height' => 12
 	];
 
+	/**
+	 * Margin between the grid and string marks.
+	 *
+	 * @var int
+	 */
 	private $markMargin = 5;
 
 	/**
@@ -182,6 +236,12 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 		return $svg;
 	}
 
+	/**
+	 * Converts the given number to roman numerals.
+	 *
+	 * @param int $integer number to convert
+	 * @return string nubmer in roman numerals
+	 */
 	private static function toRoman(int $integer): string {
 		$roman = '';
 

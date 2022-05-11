@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author Jakub Jabůrek <jaburek.jakub@gmail.com>
+ */
+
 declare(strict_types=1);
 
 namespace Chords\Song\Model;
@@ -6,8 +10,15 @@ namespace Chords\Song\Model;
 use InvalidArgumentException;
 use Chords\Song\Export\VisitorInterface;
 
+/**
+ * Song lyrics.
+ *
+ * @package Chords\Song\Model
+ */
 final class SongLyrics implements NodeContainer {
 	/**
+	 * Lyrics content.
+	 *
 	 * @var Node[]
 	 */
 	private $nodes;
@@ -19,6 +30,9 @@ final class SongLyrics implements NodeContainer {
 		return $this->nodes;
 	}
 
+	/**
+	 * @param Nodes[] $nodes lyrics content
+	 */
 	public function __construct(array $nodes) {
 		array_walk($nodes, function ($node, $index) {
 			if (!$node instanceof Node) {
