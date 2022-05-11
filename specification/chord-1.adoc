@@ -1,0 +1,139 @@
+= Chord 1.0
+
+The Chord 1.0 specification defines XML structure for recording graphical
+diagrams of chords of string instruments. This document contains an overview
+of the diagram’s format and a human-readable description of the XML structure.
+
+For a machine-readable specification, see `chord-1.xsd` file.
+
+_Copyright © 2022 Jakub Jabůrek. All rights reserved._
+
+== Diagram overview
+
+The basis of a graphical visualization of a chord of a string instrument
+consists of grid of lines. Horizontal lines represent frets, vertical lines
+represent strings. Beginning of the grid has a stronger top border. To play
+a note, the player presses a string between two frets. This gets visualized by
+a filled circle within the grid. Some chords may require the player to press
+more than one string using a single finger, this is called barre. It gets drawn
+as a thick horizontal line across the strings being pressed.
+
+The grid might not start with the first fret, as some chords are played lower
+on the instrument’s neck. In this case, the first row of the grid is left
+without its border and a number written in roman numerals is added to the right
+of the diagram to indicate what fret the first row actually represents.
+
+Additionally, some strings may be marked as open or muted. This is visualized
+by putting an empty circle for an open string or an X sign for a muted string
+above the grid where the appropriate string is located.
+
+== XML structure
+
+The root element of the XML definition is `<chord>`. It has the following
+children: `<name>` (mandatory), `<alt-names>` (optional) and `<def>`
+(mandatory).
+
+The `<name>` element contains the name of the chord. Optional element
+`<alt-names>` contains alternative names of the chord enclosed in a `<name>`
+element each.
+
+The `<def>` element contains the chord definition. The number of strings is
+defined by `<def-strings>`, number of frets by `<def-frets>`. In case the
+diagram should start with a fret later than the first, add an `offset`
+attribute to `<def-frets>` containing the number of frets from the beginning
+that should be hidden. Note that the total number of frets must include hidden
+ones, i.e. `<def-frets offset="3">7</def-frets>` will display frets iv–vii.
+
+A note is specified by a `<def-note>` element. It must contain `<note-string>`
+and `<note-fret>` specifying the string and fret being pressed. For barre
+notes, include `<note-string>` twice — first for where the barre press starts,
+second for where it ends.
+
+To add an open or muted string mark, use the `<def-mark>` element. Specify
+string number using `<mark-string>` and mark type by `<mark-type>`. Allowed
+values for mark type are `open` and `muted`.
+
+Strings are indexed from left to right and start with one. Frets are indexed
+from top to bottom and also start with one. Remember that fret offset does not
+affect indexing, i.e. for offset of 3, fret index of notes must be at least 4.
+
+Multiple notes at the same coordinates (string and fret) are not allowed. This
+includes barre notes, which occupy the entire range between the specified
+strings.
+
+== Examples
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://chords.jaburjak.cz/schema/chord-1.xsd">
+    <name>F</name>
+    <alt-names>
+        <name>Fmajor</name>
+        <name>Fdur</name>
+    </alt-names>
+    <def>
+        <def-strings>6</def-strings>
+        <def-frets>5</def-frets>
+        <def-note>
+            <note-string>1</note-string>
+            <note-string>6</note-string>
+            <note-fret>1</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>4</note-string>
+            <note-fret>2</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>2</note-string>
+            <note-fret>3</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>3</note-string>
+            <note-fret>3</note-fret>
+        </def-note>
+    </def>
+</chord>
+----
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chord PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/chord-1.dtd">
+<chord xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://chords.jaburjak.cz/schema/chord-1.xsd">
+    <name>C</name>
+    <def>
+        <def-strings>6</def-strings>
+        <def-frets offset="7">12</def-frets>
+        <def-note>
+            <note-string>5</note-string>
+            <note-fret>8</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>6</note-string>
+            <note-fret>8</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>4</note-string>
+            <note-fret>9</note-fret>
+        </def-note>
+        <def-note>
+            <note-string>3</note-string>
+            <note-fret>10</note-fret>
+        </def-note>
+        <def-mark>
+            <mark-string>1</mark-string>
+            <mark-type>muted</mark-type>
+        </def-mark>
+        <def-mark>
+            <mark-string>2</mark-string>
+            <mark-type>muted</mark-type>
+        </def-mark>
+    </def>
+</chord>
+----

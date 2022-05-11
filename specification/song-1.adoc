@@ -1,0 +1,127 @@
+= Song 1.0
+
+The Song 1.0 specification defines XML structure for recording popular song
+lyrics. This document contains an overview of a popular song anatomy and
+a human-readable description of the XML structure.
+
+For a machine-readable specification, see `song-1.xsd` file.
+
+_Copyright © 2022 Jakub Jabůrek. All rights reserved._
+
+== Song anatomy
+
+A popular song is usually divided into multiple parts, called strophes. Strophe
+can be seen as an equivalent to a chapter in a book. Strophes can be labeled,
+usually by numbers, and one strophe is usually designated as the chorus.
+
+A strophe may further be split into paragraphs, and the individual lines of
+a paragraph are called verses.
+
+In a context of a song intended to be played on a string instrument, a verse
+can contain -- apart from plain text -- chords. Chords indicate what sound the
+instrument should be playing.
+
+Some parts of the lyrics may be repeated, this normally gets shown using
+special markers instead of just repeating the word, verse or even the whole
+strophe.
+
+== XML structure
+
+The root element is `<song>`. It has two children: `<info>`, which contains
+metadata about the song, and `<lyrics>`, which contains the song lyrics.
+
+`<info>` must contain at least `<title>`, which stores the name of the song.
+Additionally, `<author>` is supported, which may contain the song author.
+
+The structure of `<lyrics>` closely mirrors the structure of popular songs. Its
+direct children may be `<strophe>`, `<repeat>` or `<strophe-ref>`. `<strophe>`
+may be labeled by an optional `label` attribute.
+
+A `<strophe-ref>` element must have `ref` attribute, which must contain the
+label of another strophe. The element will then serve as a reference to that
+strophe. Imagine writing a chorus in `<strophe>` and not wanting to repeat it
+later when it should be sung again. In this scenario, you can use
+`<strophe-ref>` to signal that the referenced strophe should be read at its
+place.
+
+`<repeat>` may carry a `count` attribute to define how many times should its
+contents be repeated. The default value is 2.
+
+Inside `<strophe>`, `<repeat>` and `<paragraph>` are allowed. Inside
+a `<paragraph>`, `<repeat>` and `<verse>` are allowed.
+
+Inside `<verse>`, plain text, `<repeat>` and `<chord>` are allowed. Plain text
+represents the song lyrics and `<chord>` a chord to be played at its place. In
+a graphical representation, the `<chord>` would get typeset above the character
+immediately following it.
+
+`<chord>` can have `print` attribute, which may contain a boolean `true` or
+`false` value. If `false`, it will not be displayed in printed outputs.
+Defaults to `true`.
+
+== Example
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE song PUBLIC "-//JABURJAK//DTD Chord 1.0//EN" "https://chords.jaburjak.cz/dtd/song-1.dtd">
+<song xmlns="https://chords.jaburjak.cz/schema/song-1.xsd"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://chords.jaburjak.cz/schema/song-1.xsd">
+  <info>
+    <title>Okoř</title>
+    <!-- <author>lidová</author> -->
+  </info>
+  <lyrics>
+    <strophe label="1">
+      <paragraph>
+        <verse><chord>D</chord>Na Okoř je cesta jako žádná ze sta,</verse>
+        <verse><chord>A7</chord>vroubená je <repeat>stromama</repeat><chord>D</chord>.</verse>
+        <verse>Když jdu po ní v létě, samoten na světě,</verse>
+        <verse><chord>A7</chord>sotva pletu nohama<chord>D</chord>.</verse>
+        <verse><chord>D</chord>Na konci té cesty <chord>D</chord>trnité,</verse>
+        <verse><chord>E</chord>stojí krčma jako <chord>A7</chord>hrad.</verse>
+        <verse><chord>D</chord>Tam zapadli trampi, hladoví a sešlí,</verse>
+        <verse><chord>A7</chord>začli sobě notovat<chord>D</chord>.</verse>
+      </paragraph>
+    </strophe>
+    <strophe label="R">
+      <repeat count="2">
+        <paragraph>
+          <verse>Na hradě Okoři <chord>A7</chord>světla už nehoří,</verse>
+          <verse><chord>D</chord>bílá paní <chord>A7</chord>šla už dávno spát.</verse>
+          <verse>Ta měla ve zvyku,</verse>
+          <verse><chord>A7</chord>podle svého budíku,</verse>
+          <verse><chord>D</chord>o půlnoci <chord>A7</chord>chodit strašívat.</verse>
+        </paragraph>
+        <paragraph>
+          <verse><chord>G</chord>Od těch dob, co jsou tam <chord>D</chord>trampové,</verse>
+          <verse><chord>E</chord>nesmí z hradu <chord>A7</chord>pryč.</verse>
+          <verse><chord>D</chord>A tak dole v podhradí,</verse>
+          <verse><chord>A7</chord>se šerifem dovádí,</verse>
+          <repeat>
+            <verse><chord>D</chord>on jí sebral <chord>A7</chord>od komnaty klíč.</verse>
+          </repeat>
+        </paragraph>
+      </repeat>
+    </strophe>
+    <strophe label="2">
+      <paragraph>
+        <verse><chord print="false">D</chord>Jednoho dne z rána,</verse>
+        <verse>roznesla se zpráva,</verse>
+        <verse><chord print="false">A7</chord>že byl Okoř <repeat>vykraden</repeat><chord print="false">D</chord>.</verse>
+        <verse>Nikdo neví dodnes,</verse>
+        <verse>kdo to tenkrát odnes,</verse>
+        <verse><chord print="false">A7</chord>nikdo nebyl <chord print="false">D</chord>dopaden.</verse>
+        <verse><chord print="false">G</chord>Šerif hrál celou noc <chord print="false">D</chord>mariáš</verse>
+        <verse>s <chord print="false">E</chord>bílou paní v <chord print="false">A7</chord>kostnici.</verse>
+        <verse><chord print="false">D</chord>Místo aby hlídal, zuřivě jí líbal,</verse>
+        <verse><chord print="false">A7</chord>dostal z toho zimnici<chord print="false">D</chord>.</verse>
+      </paragraph>
+    </strophe>
+    <repeat count="3">
+      <strophe-ref ref="R" />
+    </repeat>
+  </lyrics>
+</song>
+----
