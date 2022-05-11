@@ -6,3 +6,20 @@ Chords is
 ** defining chords of string instruments,
 ** writing song lyrics with chords, and
 * an implementation of the specification in PHP programming language.
+
+The specification is located in `specification/` directory and the
+implementation in `implementation/`.
+
+== Features
+
+* Define named chords (including alternative names).
+* Create chord diagrams, including string marks, fret offsets and barre notes.
+* Export chord diagrams as SVG images.
+* Write song lyrics and divide them into strophes, paragraphs and verses.
+* Use repeated blocks and strophe references in lyrics.
+* Include chords in lyrics.
+* Create HTML or printable PDF outputs from song lyrics.
+
+== Author
+
+_Copyright © 2022 Jakub Jabůrek. All rights reserved._
