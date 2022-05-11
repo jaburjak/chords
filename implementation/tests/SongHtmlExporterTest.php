@@ -73,7 +73,7 @@ final class SongHtmlExporterTest extends TestCase {
 						new Strophe([
 							new Paragraph([
 								new Verse([
-									new Chord('D', true),
+									new Chord('D', false),
 									new Text('Jednoho dne z rána,')
 								])
 							])
