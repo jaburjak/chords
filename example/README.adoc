@@ -1,0 +1,13 @@
+= Example Chords project
+
+This is a bare-bones example project that demonstrates two main features of
+the Chords library:
+
+* Generating printable PDF document with song lyrics. +
+For source code, see `song_to_pdf.php`. For example of the generated PDF file,
+see `okor.pdf`.
+* Exporting chord diagram as an SVG image. +
+For source code, see `chord_to_svg.php`. For example of the generated image,
+see `C.svg`.
+
+The song used in this example is a Czech folk song “Okoř”.

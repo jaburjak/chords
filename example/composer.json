@@ -1,0 +1,22 @@
+{
+	"name": "jaburjak/chords-example",
+	"description": "Example project using the Chords library.",
+	"type": "project",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Jakub Jabůrek",
+			"email": "jaburek.jakub@gmail.com",
+			"homepage": "https://www.jaburjak.cz"
+		}
+	],
+	"require": {
+		"jaburjak/chords": "^1.0"
+	},
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../implementation"
+		}
+	]
+}

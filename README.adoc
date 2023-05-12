@@ -20,6 +20,14 @@ implementation in `implementation/`.
 * Include chords in lyrics.
 * Create HTML or printable PDF outputs from song lyrics.
 
+== Example
+
+Example project that uses this library, PDF file with lyrics and SVG diagram of
+a chord are located in `example/`.
+
 == Author
 
-_Copyright © 2022 Jakub Jabůrek. All rights reserved._
+_Copyright © 2022 Jakub Jabůrek. All rights reserved._ +
+_Created as a part of the author’s bachelor’s thesis at Faculty of Information
+Technology, Czech Technical University in Prague
+(https://hdl.handle.net/10467/101798[hdl.handle.net/10467/101798])._
