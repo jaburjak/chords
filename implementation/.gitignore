@@ -5,3 +5,9 @@
 # PHPUnit
 /.phpunit.cache
 .phpunit.result.cache
+
+# phpDocumentor
+/tools
+/.phive
+/.phpdoc
+/docs/api
