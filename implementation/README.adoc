@@ -1,0 +1,22 @@
+= Chords library
+
+Chords is a PHP library that allows reading chord definitions and song lyrics
+written using the Chords specification and transforming them to other output
+formats.
+
+== Requirements
+
+PHP version 7.1 or newer is required (PHP 8 is also supported).
+
+== Usage
+
+For a minimal example, see code in `../example/`. API documentation can be
+generated using https://www.phpdoc.org/[phpDocumentor], or viewed at
+https://chords.jaburjak.cz/phpdoc/[chords.jaburjak.cz/phpdoc]. Class and
+package diagrams are available in `docs/`.
+
+The Chords specification is located in `../specification/`.
+
+== Author
+
+_Copyright © 2022 Jakub Jabůrek. All rights reserved._
