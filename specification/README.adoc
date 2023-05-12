@@ -1,0 +1,16 @@
+= Chords specification
+
+This directory contains the specification for
+
+* defining chords of string instruments, and
+* writing song lyrics with chords.
+
+Human-readable specification is written in `.adoc` files. Formal
+specification is available in `.dtd` and `.xsd` files.
+
+Example XML documents conforming to this specification are located in
+`examples/`.
+
+Graphical diagrams of the XSD schemas are available in `docs/`. Note that
+diagram of the song XSD is simplified — the `<repeat>` element can appear at
+any level under `<lyrics>`.
