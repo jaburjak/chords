@@ -11,7 +11,7 @@
 		}
 	],
 	"require": {
-		"jaburjak/chords": "^1.0"
+		"jaburjak/chords": "^2.0"
 	},
 	"repositories": [
 		{
