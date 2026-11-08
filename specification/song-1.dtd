@@ -9,7 +9,7 @@
     Author:
       Jakub Jaburek <jaburek.jakub@gmail.com>
 
-    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+    Copyright (c) 2022 Jakub Jaburek. Licensed under the MIT License.
 -->
 
 <!ELEMENT song (info, lyrics)>

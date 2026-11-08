@@ -6,7 +6,8 @@ a human-readable description of the XML structure.
 
 For a machine-readable specification, see `song-1.xsd` file.
 
-_Copyright © 2022 Jakub Jabůrek. All rights reserved._
+_Copyright © 2022 Jakub Jabůrek._ +
+_Licensed under the MIT License._
 
 == Song anatomy
 

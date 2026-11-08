@@ -10,7 +10,7 @@
     Author:
       Jakub Jaburek <jaburek.jakub@gmail.com>
 
-    Copyright (c) 2022 Jakub Jaburek. All rights reserved.
+    Copyright (c) 2022 Jakub Jaburek. Licensed under the MIT License.
 -->
 <xs:schema xmlns="https://chords.jaburjak.cz/schema/chord-1.xsd"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"

@@ -1,7 +1,7 @@
 {
 	"name": "jaburjak/chords",
 	"description": "Library for processing string instrument chords and song lyrics with chords.",
-	"license": "proprietary",
+	"license": "MIT",
 	"authors": [
 		{
 			"name": "Jakub Jabůrek",

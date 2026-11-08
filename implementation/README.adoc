@@ -20,4 +20,5 @@ The Chords specification is located in `../specification/`.
 
 == Author
 
-_Copyright © 2022 Jakub Jabůrek. All rights reserved._
+Copyright © 2022 Jakub Jabůrek. +
+Licensed under the MIT License.
