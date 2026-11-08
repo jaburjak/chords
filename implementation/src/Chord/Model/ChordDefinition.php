@@ -18,40 +18,34 @@ use InvalidArgumentException;
 final class ChordDefinition {
 	/**
 	 * Number of strings.
-	 *
-	 * @var int
 	 */
-	private $strings;
+	private int $strings;
 
 	/**
 	 * How many frets from the beginning to ignore.
-	 *
-	 * @var int
 	 */
-	private $fretOffset;
+	private int $fretOffset;
 
 	/**
 	 * Number of frets.
 	 *
 	 * This must include {@see ChordDefinition::$fretOffset}, i.e. frets must be greater than offset.
-	 *
-	 * @var int
 	 */
-	private $frets;
+	private int $frets;
 
 	/**
 	 * Notes in the chord.
 	 *
 	 * @var ChordNote[]
 	 */
-	private $notes;
+	private array $notes;
 
 	/**
 	 * String marks.
 	 *
 	 * @var ChordMark[]
 	 */
-	private $marks;
+	private array $marks;
 
 	/**
 	 * @return int number of strings

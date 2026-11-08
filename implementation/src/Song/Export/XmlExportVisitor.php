@@ -72,10 +72,8 @@ final class XmlExportVisitor implements VisitorInterface {
 
 	/**
 	 * XML document.
-	 *
-	 * @var DOMDocument
 	 */
-	private $dom;
+	private DOMDocument $dom;
 
 	/**
 	 * Current hierarchical structure of the built XML.
@@ -85,10 +83,8 @@ final class XmlExportVisitor implements VisitorInterface {
 	 * it ends with `<verse>`. When the verse is processed, it is removed from the stack and another can be added. When
 	 * the entire paragraph is processed, it is removed from the stack and another one can be added onto the strophe
 	 * that has come to the top of the stack.
-	 *
-	 * @var SplStack
 	 */
-	private $fragmentStack;
+	private SplStack $fragmentStack;
 
 	public function __construct() {
 		$implementation = new DOMImplementation();

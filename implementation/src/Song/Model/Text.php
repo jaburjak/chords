@@ -20,7 +20,7 @@ final class Text implements Node {
 	 *
 	 * @var string
 	 */
-	private $text;
+	private string $text;
 
 	/**
 	 * @return string text

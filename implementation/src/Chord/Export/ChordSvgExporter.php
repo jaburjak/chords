@@ -20,9 +20,9 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 	/**
 	 * Size of a single cell in the grid.
 	 *
-	 * @var int[]
+	 * @var array{width:int,height:int}
 	 */
-	private $cellSize = [
+	private array $cellSize = [
 		'width' => 18,
 		'height' => 20
 	];
@@ -30,67 +30,57 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 	/**
 	 * Height of overflow indication after of before the requested number of frets.
 	 *
-	 * @var int[]
+	 * @var array{top:int,bottom:int}
 	 */
-	private $cellOverflow = [
+	private array $cellOverflow = [
 		'top' => 8,
 		'bottom' => 10
 	];
 
 	/**
 	 * Radius of the circle depicting a note.
-	 *
-	 * @var int
 	 */
-	private $noteRadius = 7;
+	private int $noteRadius = 7;
 
 	/**
 	 * Height of the barre bar.
-	 *
-	 * @var int
 	 */
-	private $barreHeight = 10;
+	private int $barreHeight = 10;
 
 	/**
 	 * Border radius of the barre bar.
-	 *
-	 * @var int
 	 */
-	private $barreRadius = 6;
+	private int $barreRadius = 6;
 
 	/**
 	 * Space reserved for the fret offset number.
 	 *
-	 * @var int[]
+	 * @var array{width:int,height:int}
 	 */
-	private $offsetIndicatorSize = [
+	private array $offsetIndicatorSize = [
 		'width' => 20,
 		'height' => 18
 	];
 
 	/**
 	 * Margin between the grid and fret offset number.
-	 *
-	 * @var int
 	 */
-	private $offsetIndicatorMargin = 10;
+	private int $offsetIndicatorMargin = 10;
 
 	/**
 	 * Size of a string mark.
 	 *
-	 * @var int[]
+	 * @var array{width:int,height:int}
 	 */
-	private $markSize = [
+	private array $markSize = [
 		'width' => 12,
 		'height' => 12
 	];
 
 	/**
 	 * Margin between the grid and string marks.
-	 *
-	 * @var int
 	 */
-	private $markMargin = 5;
+	private int $markMargin = 5;
 
 	/**
 	 * @inheritdoc

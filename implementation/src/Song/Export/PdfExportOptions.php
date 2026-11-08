@@ -55,40 +55,32 @@ final class PdfExportOptions {
 	 * Paper size.
 	 *
 	 * Must be one of the `PAPER_*` constants.
-	 *
-	 * @var string
 	 */
-	private $paperSize;
+	private string $paperSize;
 
 	/**
 	 * Number of columns.
-	 *
-	 * @var int
 	 */
-	private $columns;
+	private int $columns;
 
 	/**
 	 * Font size.
 	 *
 	 * Must be one of the `FONT_*` constants.
-	 *
-	 * @var string
 	 */
-	private $fontSize;
+	private string $fontSize;
 
 	/**
 	 * Should the output include chords marked as hidden for print?
-	 *
-	 * @var bool
 	 */
-	private $printHiddenChords;
+	private bool $printHiddenChords;
 
 	/**
 	 * Additional metadata to include in the output.
 	 *
 	 * @var string[]
 	 */
-	private $metadata;
+	private array $metadata;
 
 	/**
 	 * @return string paper size

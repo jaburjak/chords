@@ -21,7 +21,7 @@ final class Verse implements NodeContainer {
 	 *
 	 * @var Node[]
 	 */
-	private $nodes;
+	private array $nodes;
 
 	/**
 	 * @inheritdoc

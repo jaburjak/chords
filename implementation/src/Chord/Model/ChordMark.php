@@ -31,17 +31,13 @@ final class ChordMark {
 
 	/**
 	 * String number.
-	 *
-	 * @var int
 	 */
-	private $string;
+	private int $string;
 
 	/**
 	 * Mark type.
-	 *
-	 * @var string
 	 */
-	private $type;
+	private string $type;
 
 	/**
 	 * @return int string number

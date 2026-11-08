@@ -24,14 +24,12 @@ final class ChordNote {
 	 *
 	 * @var int[]
 	 */
-	private $string;
+	private array $string;
 
 	/**
 	 * Fret number.
-	 *
-	 * @var int
 	 */
-	private $fret;
+	private int $fret;
 
 	/**
 	 * @return int[] string number

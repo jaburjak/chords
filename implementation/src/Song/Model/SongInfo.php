@@ -17,17 +17,13 @@ use Chords\Song\Export\VisitorInterface;
 final class SongInfo {
 	/**
 	 * Song title.
-	 *
-	 * @var string
 	 */
-	private $title;
+	private string $title;
 
 	/**
 	 * Song author.
-	 *
-	 * @var string|null
 	 */
-	private $author;
+	private string|null $author;
 
 	/**
 	 * @return string song title

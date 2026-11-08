@@ -17,24 +17,20 @@ use InvalidArgumentException;
 final class Chord {
 	/**
 	 * Chord name.
-	 *
-	 * @var string
 	 */
-	private $name;
+	private string $name;
 
 	/**
 	 * Alternative chord names.
 	 *
 	 * @var string[]
 	 */
-	private $alternativeNames;
+	private array $alternativeNames;
 
 	/**
 	 * Chord definition.
-	 *
-	 * @var ChordDefinition
 	 */
-	private $definition;
+	private ChordDefinition $definition;
 
 	/**
 	 * @return string chord name

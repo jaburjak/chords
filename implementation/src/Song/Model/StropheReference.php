@@ -17,10 +17,8 @@ use Chords\Song\Export\VisitorInterface;
 final class StropheReference implements Node {
 	/**
 	 * Referenced strophe.
-	 *
-	 * @var Strophe
 	 */
-	private $strophe;
+	private Strophe $strophe;
 
 	/**
 	 * @return Strophe referenced strophe

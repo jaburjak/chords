@@ -162,47 +162,37 @@ final class PdfExportVisitor implements VisitorInterface {
 
 	/**
 	 * Export settings.
-	 *
-	 * @var PdfExportOptions
 	 */
-	private $options;
+	private PdfExportOptions $options;
 
 	/**
 	 * Lines of HTML code.
 	 *
 	 * @var string[]
 	 */
-	private $html = [];
+	private array $html = [];
 
 	/**
 	 * Chunks in the current line.
 	 *
-	 * Contains arrays with `chord` and `text` keys.
-	 *
-	 * @var array[]|null
+	 * Contains keys `chord` and `text` with array values.
 	 */
-	private $row = null;
+	private array|null $row = null;
 
 	/**
 	 * Repeat count of the currently processed node.
-	 *
-	 * @var int|null
 	 */
-	private $repeat = null;
+	private int|null $repeat = null;
 
 	/**
 	 * Label of the currently processed strophe.
-	 *
-	 * @var string|null
 	 */
-	private $label = null;
+	private string|null $label = null;
 
 	/**
 	 * Does the current line have any chords?
-	 *
-	 * @var bool
 	 */
-	private $hasChords = false;
+	private bool $hasChords = false;
 
 	/**
 	 * @param PdfExportOptions $options export settings

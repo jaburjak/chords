@@ -21,7 +21,7 @@ final class SongLyrics implements NodeContainer {
 	 *
 	 * @var Node[]
 	 */
-	private $nodes;
+	private array $nodes;
 
 	/**
 	 * @inheritdoc

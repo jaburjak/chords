@@ -21,14 +21,12 @@ final class Repeat implements NodeContainer {
 	 *
 	 * @var Node[]
 	 */
-	private $nodes;
+	private array $nodes;
 
 	/**
 	 * How many times the contents should be repeated.
-	 *
-	 * @var int
 	 */
-	private $count;
+	private int $count;
 
 	/**
 	 * @inheritdoc

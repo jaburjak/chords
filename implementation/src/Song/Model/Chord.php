@@ -18,17 +18,13 @@ use Chords\Song\Export\VisitorInterface;
 final class Chord implements Node {
 	/**
 	 * Chord name.
-	 *
-	 * @var string
 	 */
-	private $name;
+	private string $name;
 
 	/**
 	 * Should the chord be included in printed output?
-	 *
-	 * @var bool
 	 */
-	private $print;
+	private bool $print;
 
 	/**
 	 * @return string chord name

@@ -21,14 +21,12 @@ final class Strophe implements NodeContainer {
 	 *
 	 * @var Node[]
 	 */
-	private $nodes;
+	private array $nodes;
 
 	/**
 	 * Strophe label.
-	 *
-	 * @var string|null
 	 */
-	private $label;
+	private string|null $label;
 
 	/**
 	 * @inheritdoc
