@@ -12,12 +12,11 @@ use Chords\Song\Model\Strophe;
 use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class SongXmlExporterTest extends TestCase {
-	/**
-	 * @dataProvider dataProvider
-	 */
+	#[DataProvider('dataProvider')]
 	public function testXmlExport($expected, $song): void {
 		$exporter = new SongXmlExporter();
 
@@ -26,7 +25,7 @@ final class SongXmlExporterTest extends TestCase {
 		$this->assertXmlStringEqualsXmlString($expected, $xml);
 	}
 
-	public function dataProvider(): array {
+	public static function dataProvider(): array {
 		$R = new Strophe([
 			new Repeat([
 				new Paragraph([

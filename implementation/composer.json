@@ -10,7 +10,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.1.0",
+		"php": ">=8.2",
 		"ext-simplexml": "*",
 		"ext-dom": "*",
 		"dompdf/dompdf": "^1.2",
@@ -18,14 +18,9 @@
 		"setasign/fpdi": "^2.3"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^7.5"
+		"phpunit/phpunit": "^11.5"
 	},
 	"autoload": {
 		"psr-4": {"Chords\\": "src/"}
-	},
-	"config": {
-		"platform": {
-			"php": "7.1.7"
-		}
 	}
 }

@@ -6,7 +6,8 @@ formats.
 
 == Requirements
 
-PHP version 7.1 or newer is required (PHP 8 is also supported).
+PHP version 8.2 or newer and https://www.php.net/manual/en/book.image.php[GD]
+are required.
 
 == Usage
 

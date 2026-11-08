@@ -6,19 +6,18 @@ use Chords\Chord\Model\ChordDefinition;
 use Chords\Chord\Model\ChordMark;
 use Chords\Chord\Model\ChordNote;
 use Chords\Chord\Parser\ChordXmlParser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ChordXmlParserTest extends TestCase {
-	/**
-	 * @dataProvider xmlProvider
-	 */
+	#[DataProvider('xmlProvider')]
 	public function testValidXml($xml, $expected): void {
 		$parser = new ChordXmlParser();
 
 		$this->assertEquals($expected, $parser->parse($xml));
 	}
 
-	public function xmlProvider(): array {
+	public static function xmlProvider(): array {
 		return [
 			'empty chord' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -149,9 +148,7 @@ XML
 		];
 	}
 
-	/**
-	 * @dataProvider invalidXmlProvider
-	 */
+	#[DataProvider('invalidXmlProvider')]
 	public function testInvalidXml($xml, $expectedException): void {
 		$parser = new ChordXmlParser();
 
@@ -160,7 +157,7 @@ XML
 		$parser->parse($xml);
 	}
 
-	public function invalidXmlProvider(): array {
+	public static function invalidXmlProvider(): array {
 		return [
 			'missing <name>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>

@@ -4,19 +4,20 @@ stages:
 
 test:
   stage: test
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: stayallive/php:8.5
   before_script:
-    - cd implementation
-    - sudo chown -R "$(id -un):$(id -gn)" .
-    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    - docker-php-ext-enable gd
   script:
+    - cd implementation
+    - composer install --prefer-dist --no-ansi --no-interaction --no-progress
     - ./vendor/bin/phpunit
 
 package:
   stage: package
-  image: edbizarro/gitlab-ci-pipeline-php:7.1
+  image: stayallive/php:8.5
   before_script:
-    - sudo chown -R "$(id -un):$(id -gn)" .
+    - apt-get update -qq
+    - apt-get install -qq --no-install-recommends zip
   script:
     - cd implementation
     - zip -q -r ../package.zip .

@@ -12,19 +12,18 @@ use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
 use Chords\Song\Parser\SongXmlParser;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class SongXmlParserTest extends TestCase {
-	/**
-	 * @dataProvider xmlProvider
-	 */
+	#[DataProvider('xmlProvider')]
 	public function testValidXml($xml, $expected): void {
 		$parser = new SongXmlParser();
 
 		$this->assertEquals($expected, $parser->parse($xml));
 	}
 
-	public function xmlProvider(): array {
+	public static function xmlProvider(): array {
 		$R = new Strophe([
 			new Repeat([
 				new Paragraph([
@@ -268,9 +267,7 @@ XML
 		];
 	}
 
-	/**
-	 * @dataProvider invalidXmlProvider
-	 */
+	#[DataProvider('invalidXmlProvider')]
 	public function testInvalidXml($xml, $expectedException): void {
 		$parser = new SongXmlParser();
 
@@ -279,7 +276,7 @@ XML
 		$parser->parse($xml);
 	}
 
-	public function invalidXmlProvider(): array {
+	public static function invalidXmlProvider(): array {
 		return [
 			'missing <info>' => [<<<XML
 <?xml version="1.0" encoding="UTF-8"?>

@@ -6,19 +6,18 @@ use Chords\Chord\Model\Chord;
 use Chords\Chord\Model\ChordDefinition;
 use Chords\Chord\Model\ChordMark;
 use Chords\Chord\Model\ChordNote;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class ChordSvgExporterTest extends TestCase {
-	/**
-	 * @dataProvider dataProvider
-	 */
+	#[DataProvider('dataProvider')]
 	public function testSvgExport($xml, $expected): void {
 		$exporter = new ChordSvgExporter();
 
 		$this->assertEquals($expected, $exporter->toSvg($xml, $expected));
 	}
 
-	public function dataProvider(): array {
+	public static function dataProvider(): array {
 		return [
 			[new Chord(
 				'Dmi',

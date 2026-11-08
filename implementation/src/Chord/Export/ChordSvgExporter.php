@@ -262,7 +262,7 @@ final class ChordSvgExporter implements ChordSvgExporterInterface {
 		];
 
 		foreach ($lookup as $rm => $value) {
-			$roman .= str_repeat($rm, (integer) ($integer / $value));
+			$roman .= str_repeat($rm, (int) ($integer / $value));
 
 			$integer = $integer % $value;
 		}

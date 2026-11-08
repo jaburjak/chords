@@ -12,12 +12,11 @@ use Chords\Song\Model\Strophe;
 use Chords\Song\Model\StropheReference;
 use Chords\Song\Model\Text;
 use Chords\Song\Model\Verse;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 final class SongHtmlExporterTest extends TestCase {
-	/**
-	 * @dataProvider dataProvider
-	 */
+	#[DataProvider('dataProvider')]
 	public function testHtmlExport($song, $expected): void {
 		$exporter = new SongHtmlExporter();
 
@@ -26,7 +25,7 @@ final class SongHtmlExporterTest extends TestCase {
 		$this->assertEquals($expected, $html);
 	}
 
-	public function dataProvider(): array {
+	public static function dataProvider(): array {
 		$R = new Strophe([
 				new Paragraph([
 					new Verse([
